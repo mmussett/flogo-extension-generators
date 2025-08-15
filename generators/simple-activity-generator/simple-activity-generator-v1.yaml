@@ -3,7 +3,38 @@ kind: Template
 metadata:
   name: simple-activity-generator-v1
   title: Flogo Activity Extension Scaffolder
-  description: Generates a scaffold golang repository for creating Flogo activity extension. 
+  description: |
+    # Welcome to the Flogo Activity Extension Scaffolder
+
+    This template generates a scaffold golang repository for creating Flogo activity extension. 
+
+    ## Pre-requisite actions before running this template
+
+    Before running this template please head over to https://github.com/TIBCOSoftware/flogo-enterprise-hub and fork this repository.
+    
+
+    ## Post-actions to be done after running this template
+
+    This template will create the Flogo Activity Extension under the extensions folder in your forked version of this repository
+    before committing the changes back.
+
+    1. You will need to do a clone of this repository in order to start developing your newly created extension
+
+    ```
+    cd src
+    gh repo clone mmussett/flogo-enterprise-hub
+    ```
+
+
+    2. In order to utilise this new extension you will need to run 'mod tidy' in the folder under extensions/<your-extension-category>
+
+
+    ```
+    cd flogo-enterprise-hub/extensions/<extension-category>
+    go mod tidy
+    ```
+    
+
   tags:
     - flogo
     - generator
@@ -478,20 +509,11 @@ spec:
           shortName: ${{ parameters.extensionName }}
           description: ${{ parameters.description }}
 
-
-
-
-    - id: listDirectories
-      name: List Directories in Repository
-      action: file:listDirectories
-
-
     - id: push
       name: Push Current Repo
       action: tibco:git:push
       input:
         failOnError: true
-
 
   output:
     links:
