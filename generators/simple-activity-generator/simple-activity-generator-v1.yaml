@@ -195,42 +195,42 @@ spec:
         - hasOutputObjectWithSchema
       properties:
         hasOutputString:
-          title: Scaffolder to generate Activity with String Input field?
+          title: Scaffolder to generate Activity with String output field?
           type: string
           enum:
             - yes
             - no
           default: yes          
         hasOutputBoolean:
-          title: Scaffolder to generate Activity with String Input field?
+          title: Scaffolder to generate Activity with String output field?
           type: string
           enum:
             - yes
             - no
           default: no
         hasOutputInteger:
-          title: Scaffolder to generate Activity with String Input field?
+          title: Scaffolder to generate Activity with String output field?
           type: string
           enum:
             - yes
             - no
           default: no
         hasOutputDecimal:
-          title: Scaffolder to generate Activity with String Input field?
+          title: Scaffolder to generate Activity with String output field?
           type: string
           enum:
             - yes
             - no
           default: no
         hasOutputObject:
-          title: Scaffolder to generate Activity with String Input field?
+          title: Scaffolder to generate Activity with String output field?
           type: string
           enum:
             - yes
             - no
           default: no
         hasOutputObjectWithSchema:
-          title: Scaffolder to generate Activity with String Input field?
+          title: Scaffolder to generate Activity with String output field?
           type: string
           enum:
             - yes
