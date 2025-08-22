@@ -11,95 +11,75 @@
 		"smallIcon": "icons/trigger-icon@2x.png",
 		"largeIcon": "icons/trigger-icon@3x.png"
 	},
-	"ref": "github.com/${{values.owner}}/flogo-enterprise-hub/extensions/${{values.category}}/trigger/${{values.activityName}}",
+	"ref": "github.com/${{values.owner}}/flogo-enterprise-hub/extensions/${{values.extensionName}}/trigger/${{values.activityName}}",
 	"settings": [],
 	"handler": {
 		"settings": [
 			{
-                "name": "Scheduler Options",
+                "name": "Dropdown Setting",
                 "type": "string",
                 "required": true,
                 "display": {
-                    "name": "Scheduler Options",
-                    "description": "The scheduler options for cron and timer",
+                    "name": "Dropdown Options",
+                    "description": "Dropdown settings option",
                     "type": "dropdown",
                     "selection": "single"
                 },
                 "value": "Timer",
                 "allowed": [
-                    "Timer",
-                    "Cron Job"
+                    "Option 1",
+                    "Option 2"
                 ]
             },
 			{
-				"name": "Start Time",
+				"name": "Date Time Setting",
 				"type": "string",
 				"display": {
-					"name": "Start Time",
+					"name": "Date Time",
 					"type": "dateTime",
-					"description": "Start time to start the flow execution",
+					"description": "Date time setting",
 					"appPropertySupport": true
 				}
 			},
 			{
-				"name": "Repeating",
+				"name": "Boolean Setting",
 				"type": "boolean",
 				"display": {
-					"name": "Repeating",
-					"description": "Indicates whether this flow should run only once or multiple times"
+					"name": "Boolean",
+					"description": "Boolean setting"
 				},
 				"value": false,
 				"required": true
 			},
 			{
-				"name": "Delayed Start",
-				"type": "boolean",
-				"display": {
-					"name": "Delayed Start",
-					"description": "Adds delay to start time",
-					"appPropertySupport": true
-				},
-				"value": false,
-				"required": true
-			},
-			{
-				"name": "Time Interval",
+				"name": "Integer Setting",
 				"type": "integer",
 				"display": {
-					"name": "Time Interval",
-					"description": "The time interval to start the flow execution",
+					"name": "Integer",
+					"description": "Integer setting",
 					"appPropertySupport": true
 				},
 				"value": 1,
 				"required": true
 			},
-			{
-				"name": "Interval Unit",
-				"type": "string",
-				"required": true,
+       	 	{
+            	"name": "anInputDecimal",
+            	"type": "number",
 				"display": {
-					"name": "Interval Unit",
-					"description": "The unit of time interval to start the flow execution",
-					"type": "dropdown",
-					"selection": "single",
+					"name": "Numeric",
+					"description": "Numeric setting",
 					"appPropertySupport": true
 				},
-				"value": "Second",
-				"allowed": [
-					"Second",
-					"Minute",
-					"Hour",
-					"Day",
-					"Week"
-				]
-			},
+				"value": 1.0,
+            	"required": true
+        	},
 			{
-                "name": "Cron Expression",
+                "name": "String Setting",
                 "type": "string",
                 "display": {
-                    "name": "Cron Expression",
-                    "type": "cron",
-                    "description": "Schedule based on this cron expression. Please edit to set a schedule not configurable with Cron Expression Builder.",
+                    "name": "String",
+                    "type": "string",
+                    "description": "String setting.",
                     "appPropertySupport": true
                 },
                 "value": ""
