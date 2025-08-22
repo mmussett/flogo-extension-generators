@@ -99,6 +99,12 @@ spec:
     - title: Trigger Settings Configuration
       required:
         - hasConnectionManager
+        - hasSettingsString
+        - hasSettingsBoolean
+        - hasSettingsDropdown
+        - hasSettingsDateTime
+        - hasSettingsInteger
+        - hasSettingsDecimal
       properties:
         hasConnectionManager:
           title: Scaffolder to generate Trigger with connection manager support?
@@ -107,7 +113,48 @@ spec:
             - yes
             - no
           default: no          
-
+        hasSettingsString:
+          title: Scaffolder to generate Trigger with settings string field?
+          type: string
+          enum:
+            - yes
+            - no
+          default: yes  
+        hasSettingsBoolean:
+          title: Scaffolder to generate Trigger with settings boolean field?
+          type: string
+          enum:
+            - yes
+            - no
+          default: no
+        hasSettingsDropdown:
+          title: Scaffolder to generate Trigger with settings dropdown field?
+          type: string
+          enum:
+            - yes
+            - no
+          default: no
+        hasSettingsDateTime:
+          title: Scaffolder to generate Trigger with settings date-time field?
+          type: string
+          enum:
+            - yes
+            - no
+          default: no
+        hasSettingsInteger:
+          title: Scaffolder to generate Trigger with settings integer field?
+          type: string
+          enum:
+            - yes
+            - no
+          default: no
+        hasSettingsDecimal:
+          title: Scaffolder to generate Trigger with settings decimal field?
+          type: string
+          enum:
+            - yes
+            - no
+          default: no  
 
     - title: Trigger Handler Configuration
       required:
@@ -127,7 +174,7 @@ spec:
             - no
           default: yes          
         hasHandlerBoolean:
-          title: Scaffolder to generate Trigger with handlert boolean field?
+          title: Scaffolder to generate Trigger with handler boolean field?
           type: string
           enum:
             - yes
@@ -307,6 +354,12 @@ spec:
           version: ${{ parameters.version }}
           triggerName: ${{ each.value }}
           hasConnectionManager: ${{ parameters.hasConnectionManager }}
+          hasSettingsString: ${{ parameters.hasSettingsString }}
+          hasSettingsBoolean: ${{ parameters.hasSettingsBoolean }}
+          hasSettingsDropdown: ${{ parameters.hasSettingsDropdown }}
+          hasSettingsDateTime: ${{ parameters.hasSettingsDateTime }}
+          hasSettingsInteger: ${{ parameters.hasSettingsInteger }}
+          hasSettingsDecimal: ${{ parameters.hasSettingsDecimal }}
           hasInputString: ${{ parameters.hasInputString }}
           hasInputBoolean: ${{ parameters.hasInputBoolean }}
           hasInputInteger: ${{ parameters.hasInputInteger }}
@@ -338,6 +391,9 @@ spec:
           hasSettingsString: ${{ parameters.hasSettingsString }}
           hasSettingsBoolean: ${{ parameters.hasSettingsBoolean }}
           hasSettingsDropdown: ${{ parameters.hasSettingsDropdown }}
+          hasSettingsDateTime: ${{ parameters.hasSettingsDateTime }}
+          hasSettingsInteger: ${{ parameters.hasSettingsInteger }}
+          hasSettingsDecimal: ${{ parameters.hasSettingsDecimal }}
           hasInputString: ${{ parameters.hasInputString }}
           hasInputBoolean: ${{ parameters.hasInputBoolean }}
           hasInputInteger: ${{ parameters.hasInputInteger }}
@@ -366,37 +422,6 @@ spec:
           version: ${{ parameters.version }}
           triggerName: ${{ each.value }}
           hasConnection: ${{ parameters.scaffoldConnector }}
-
-    - id: generateTriggerTestGo
-      name: Generate trigger_test.go
-      each: ${{ parameters.triggerList}}
-      action: fetch:template:file
-      input:
-        url: ./skeletons/trigger/trigger_test.go.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/trigger/" + each.value + "/trigger_test.go" }}
-        replace: true
-        values:
-          extensionName: ${{ parameters.extensionName }}
-          category: ${{ parameters.category }}
-          version: ${{ parameters.version }}
-          triggerName: ${{ each.value }}
-          hasConnection: ${{ parameters.scaffoldConnector }}
-          hasSettingsString: ${{ parameters.hasSettingsString }}
-          hasSettingsBoolean: ${{ parameters.hasSettingsBoolean }}
-          hasSettingsDropdown: ${{ parameters.hasSettingsDropdown }}
-          hasInputString: ${{ parameters.hasInputString }}
-          hasInputBoolean: ${{ parameters.hasInputBoolean }}
-          hasInputInteger: ${{ parameters.hasInputInteger }}
-          hasInputDecimal: ${{ parameters.hasInputDecimal }}
-          hasInputObject: ${{ parameters.hasInputObject }}
-          hasInputObjectWithSchema: ${{ parameters.hasInputObjectWithSchema }}
-          hasInputParameters: ${{ parameters.hasInputParameters }}
-          hasOutputString: ${{ parameters.hasOutputString }}
-          hasOutputBoolean: ${{ parameters.hasOutputBoolean }}
-          hasOutputInteger: ${{ parameters.hasOutputInteger }}
-          hasOutputDecimal: ${{ parameters.hasOutputDecimal }}
-          hasOutputObject: ${{ parameters.hasOutputObject }}
-          hasOutputObjectWithSchema: ${{ parameters.hasOutputObjectWithSchema }}
 
     - id: generateGoMod
       name: Generate go.mod

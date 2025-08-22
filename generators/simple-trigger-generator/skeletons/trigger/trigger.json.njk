@@ -15,75 +15,104 @@
 	"settings": [],
 	"handler": {
 		"settings": [
+{%- if(values.hasSettingsString === 'yes') %}
 			{
-                "name": "Dropdown Setting",
+                "name": "aSettingString",
+                "type": "string",
+                "display": {
+                    "name": "String",
+				    "description": "This description appears on tooltip hover.",
+					"required": true,
+                    "type": "string",
+                    "appPropertySupport": true
+                },
+                "value": ""
+            }
+{%- endif %}			
+{%- if(values.hasSettingsString === 'yes' and (values.hasSettingsBoolean === 'yes' or values.hasSettingsDropdown === 'yes' or values.hasSettingsDateTime === 'yes' or values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}
+			,
+{%- endif %}
+{%- if(values.hasSettingsBoolean === 'yes') %}
+			{
+				"name": "aSettingBoolean",
+				"type": "boolean",
+				"display": {
+					"name": "Boolean",
+					"description": "This description appears on tooltip hover."
+				},
+				"value": false,
+				"required": true
+			}
+{%- endif %}
+{%- if(values.hasSettingsBoolean === 'yes' and (values.hasSettingsDropdown === 'yes' or values.hasSettingsDateTime === 'yes' or values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}       
+        ,
+{%- endif %}        
+{%- if(values.hasSettingsDropdown === 'yes') %}
+			{
+                "name": "aSettingStringDropdown",
                 "type": "string",
                 "required": true,
                 "display": {
                     "name": "Dropdown Options",
-                    "description": "Dropdown settings option",
+                    "description": "This description appears on tooltip hover.",
                     "type": "dropdown",
                     "selection": "single"
                 },
                 "value": "Timer",
                 "allowed": [
                     "Option 1",
-                    "Option 2"
+                    "Option 2",
+					"Option 3"
                 ]
-            },
+            }
+{%- endif %}
+{%- if(values.hasSettingsDropdown === 'yes' and (values.hasSettingsDateTime === 'yes' or values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}       
+			,
+{%- endif %} 
+{%- if(values.hasSettingsDateTime === 'yes') %}       
 			{
-				"name": "Date Time Setting",
+				"name": "aSettingDateTime",
 				"type": "string",
 				"display": {
 					"name": "Date Time",
 					"type": "dateTime",
-					"description": "Date time setting",
+					"description": "This description appears on tooltip hover.",
 					"appPropertySupport": true
 				}
-			},
+			}
+{%- endif %}
+{%- if(values.hasSettingsDateTime === 'yes' and (values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}       
+			,
+{%- endif %} 
+{%- if(values.hasSettingsInteger === 'yes') %}       
 			{
-				"name": "Boolean Setting",
-				"type": "boolean",
-				"display": {
-					"name": "Boolean",
-					"description": "Boolean setting"
-				},
-				"value": false,
-				"required": true
-			},
-			{
-				"name": "Integer Setting",
+				"name": "aSettingInteger",
 				"type": "integer",
 				"display": {
 					"name": "Integer",
-					"description": "Integer setting",
+					"description": "This description appears on tooltip hover.",
 					"appPropertySupport": true
 				},
 				"value": 1,
 				"required": true
-			},
+			}
+{%- endif %}
+{%- if(values.hasSettingsInteger === 'yes' and (values.hasSettingsNumber === 'yes')) %}       
+			,
+{%- endif %}
+{%- if(values.hasSettingsNumber === 'yes') %}       
        	 	{
-            	"name": "anInputDecimal",
+            	"name": "aSettingNumber",
             	"type": "number",
 				"display": {
 					"name": "Numeric",
-					"description": "Numeric setting",
+					"description": "This description appears on tooltip hover.",
 					"appPropertySupport": true
 				},
 				"value": 1.0,
             	"required": true
-        	},
-			{
-                "name": "String Setting",
-                "type": "string",
-                "display": {
-                    "name": "String",
-                    "type": "string",
-                    "description": "String setting.",
-                    "appPropertySupport": true
-                },
-                "value": ""
-            }
+        	}
+{%- endif %}
 		]
 	}
 }
