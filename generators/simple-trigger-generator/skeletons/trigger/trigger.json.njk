@@ -10,9 +10,6 @@
 		"visible": true,
 		"smallIcon": "icons/trigger-icon@2x.png",
 		"largeIcon": "icons/trigger-icon@3x.png",
-    	"wizard": [
-      		"Configurations"
-    	],
 		"tags": ["${{values.category}}"]
 	},
 	"ref": "github.com/${{values.owner}}/flogo-enterprise-hub/extensions/${{values.extensionName}}/trigger/${{values.triggerName}}",
@@ -28,10 +25,7 @@
 					"required": true,
                     "type": "string",
                     "appPropertySupport": true
-                },       
-				"wizard": {
-          			"step": "Configurations"
-        		}
+                }
             }
 {%- endif %}			
 {%- if(values.hasSettingsString === 'yes' and (values.hasSettingsBoolean === 'yes' or values.hasSettingsDropdown === 'yes' or values.hasSettingsDateTime === 'yes' or values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}
@@ -44,10 +38,7 @@
 				"display": {
 					"name": "Boolean",
 					"description": "This description appears on tooltip hover."
-				},
-				"wizard": {
-          			"step": "Configurations"
-        		},				
+				},			
 				"value": false,
 				"required": true
 			}
@@ -71,10 +62,7 @@
                     "description": "This description appears on tooltip hover.",
                     "type": "dropdown",
                     "selection": "single"
-                },
-        		"wizard": {
-          			"step": "Configurations"
-        		}
+                }
             }  
 {%- endif %}
 {%- if(values.hasSettingsDropdown === 'yes' and (values.hasSettingsDateTime === 'yes' or values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}       
@@ -108,10 +96,7 @@
 					"name": "Integer",
 					"description": "This description appears on tooltip hover.",
 					"appPropertySupport": true
-				},
-        		"wizard": {
-          			"step": "Configurations"
-        		}
+				}
 			}
 {%- endif %}
 {%- if(values.hasSettingsInteger === 'yes' and (values.hasSettingsNumber === 'yes')) %}       
@@ -127,23 +112,68 @@
 					"name": "Numeric",
 					"description": "This description appears on tooltip hover.",
 					"appPropertySupport": true
-				},
-        		"wizard": {
-          			"step": "Configurations"
-        		}
+				}
 			}
 {%- endif %}	
 		]
 	},
  	"outputs": [
-    	{
-        	"name": "output",
-        	"type": "object"
-    	}
-  	],
-  	"actions": [
-    {
-      		"name": "Finish"
-    }
-  ]
+{%- if(values.hasOutputString === 'yes') %}
+        {
+           "name": "anOutputString",
+           "type": "string"
+        }
+{%- endif %} 
+{%- if(values.hasOutputString === 'yes' and (values.hasOutputBoolean === 'yes' or values.hasOutputInteger === 'yes'  or values.hasOutputDecimal === 'yes' or values.hasOutputObject === 'yes' or values.hasOutputObjectWithSchema === 'yes')) %}                       
+        ,
+{%- endif %}
+{%- if(values.hasOutputBoolean === 'yes') %}
+        {
+            "name": "anOutputBoolean",
+            "type": "boolean"
+        }
+{%- endif %} 
+{%- if(values.hasOutputBoolean === 'yes' and (values.hasOutputInteger === 'yes'  or values.hasOutputDecimal === 'yes' or values.hasOutputObject === 'yes' or values.hasOutputObjectWithSchema === 'yes')) %}               
+        ,
+{%- endif %}
+{%- if(values.hasOutputInteger === 'yes') %}
+        {
+            "name": "anOutputInteger",
+            "type": "integer"
+        }
+{%- endif %} 
+{%- if(values.hasOutputInteger === 'yes'  and (values.hasOutputDecimal === 'yes' or values.hasOutputObject === 'yes' or values.hasOutputObjectWithSchema === 'yes')) %}             
+        ,
+{%- endif %}
+{%- if(values.hasOutputDecimal === 'yes') %}
+        {
+            "name": "anOutputDecimal",
+            "type": "number"
+        }
+{%- endif %} 
+{%- if(values.hasOutputDecimal === 'yes' and (values.hasOutputObject === 'yes' or values.hasOutputObjectWithSchema === 'yes')) %}          
+        ,
+{%- endif %}
+{%- if(values.hasOutputObject === 'yes') %}
+        {
+           "name": "anOutputObject",
+           "type": "object"
+        }
+{%- endif %} 
+{%- if(values.hasOutputObject === 'yes' or values.hasOutputObjectWithSchema === 'yes') %}          
+        ,
+{%- endif %}
+{%- if(values.hasOutputObjectWithSchema === 'yes') %}
+        {
+            "name": "anOutputObjectWithSchema",
+            "type": "object",
+            "display": {
+                "name": "JSON Schema",
+                "description": "An example JSON object",
+                "type": "texteditor",
+                "syntax": "json"
+            }
+        }
+{%- endif %}
+  	]
 }
