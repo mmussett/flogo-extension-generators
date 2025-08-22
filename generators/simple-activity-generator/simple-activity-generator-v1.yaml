@@ -426,7 +426,7 @@ spec:
         replace: true
         values:
           owner:   ${{ (parameters.repoUrl | parseRepoUrl).owner }}
-          category: ${{ parameters.category }}
+          extensionName: ${{ parameters.extensionName }}
 
     - id: generateReadme
       name: Generate top-level README.md
@@ -436,7 +436,7 @@ spec:
         targetPath: ${{ "extensions/" + parameters.extensionName + "/README.md" }}
         replace: true
         values:
-          extensionName: ${{ parameters.category }}
+          extensionName: ${{ parameters.extensionName }}
           overview: ${{ parameters.overview}}
           shortName: ${{ parameters.extensionName }}
           description: ${{ parameters.description }}

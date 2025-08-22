@@ -1,0 +1,48 @@
+{
+    "name": "${{values.activityName}}",
+    "version": "1.0.0",
+    "type": "flogo:activity",
+    "title": "${{values.category}} ${{values.activityName}}",
+    "author": "TIBCO Developer Hub",
+    "display": {
+        "category": "${{values.category}}",
+        "visible": true,
+        "description": "This activity executes run operation on a SSH server",
+        "smallIcon": "icons/activity-icon@2x.png",
+		"largeIcon": "icons/activity-icon@3x.png"
+    },
+    "feature": {
+        "retry": {
+            "enabled": true
+        }
+    },
+    "ref": "github.com/${{values.repoOwner}}/flogo-enterprise-hub/extensions/${{values.category}}/activity/${{values.activityName}}",
+    "inputs": [
+{%- if(values.flogo_project_description) %}
+
+{%- endif %}        
+        {
+            "name": "${{values.category}} Connection",
+            "type": "connection",
+            "required": true,
+            "allowed": [],
+            "display": {
+                "name": "${{values.category}} Connection",
+                "description": "Select ${{values.category}} Connection",
+                "type": "connection",
+                "selection": "single"
+            }
+        },
+        
+        {
+            "name": "inString",
+            "type": "string"
+        }
+    ],
+    "outputs": [
+        {
+           "name": "outSting",
+           "type": "string"
+        }
+    ]
+}
