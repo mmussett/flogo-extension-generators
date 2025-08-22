@@ -395,27 +395,7 @@ spec:
         targetPath: ${{ "extensions/" + parameters.extensionName + "/activity/" + each.value + "/activity_test.go" }}
         replace: true
         values:
-          extensionName: ${{ parameters.extensionName }}
-          category: ${{ parameters.category }}
-          version: ${{ parameters.version }}
           activityName: ${{ each.value }}
-          hasConnection: ${{ parameters.scaffoldConnector }}
-          hasSettingsString: ${{ parameters.hasSettingsString }}
-          hasSettingsBoolean: ${{ parameters.hasSettingsBoolean }}
-          hasSettingsDropdown: ${{ parameters.hasSettingsDropdown }}
-          hasInputString: ${{ parameters.hasInputString }}
-          hasInputBoolean: ${{ parameters.hasInputBoolean }}
-          hasInputInteger: ${{ parameters.hasInputInteger }}
-          hasInputDecimal: ${{ parameters.hasInputDecimal }}
-          hasInputObject: ${{ parameters.hasInputObject }}
-          hasInputObjectWithSchema: ${{ parameters.hasInputObjectWithSchema }}
-          hasInputParameters: ${{ parameters.hasInputParameters }}
-          hasOutputString: ${{ parameters.hasOutputString }}
-          hasOutputBoolean: ${{ parameters.hasOutputBoolean }}
-          hasOutputInteger: ${{ parameters.hasOutputInteger }}
-          hasOutputDecimal: ${{ parameters.hasOutputDecimal }}
-          hasOutputObject: ${{ parameters.hasOutputObject }}
-          hasOutputObjectWithSchema: ${{ parameters.hasOutputObjectWithSchema }}
 
     - id: generateGoMod
       name: Generate go.mod

@@ -423,6 +423,18 @@ spec:
           triggerName: ${{ each.value }}
           hasConnection: ${{ parameters.scaffoldConnector }}
 
+    - id: generateTriggerTestGo
+      name: Generate trigger_test.go
+      each: ${{ parameters.triggerList}}
+      action: fetch:template:file
+      input:
+        url: ./skeletons/trigger/trigger_test.go.njk
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/trigger/" + each.value + "/trigger_test.go" }}
+        replace: true
+        values:
+          triggerName: ${{ each.value }}
+
+
     - id: generateGoMod
       name: Generate go.mod
       action: fetch:template:file

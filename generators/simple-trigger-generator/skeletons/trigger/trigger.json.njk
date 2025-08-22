@@ -9,10 +9,13 @@
 		"category": "${{values.category}}",
 		"visible": true,
 		"smallIcon": "icons/trigger-icon@2x.png",
-		"largeIcon": "icons/trigger-icon@3x.png"
+		"largeIcon": "icons/trigger-icon@3x.png",
+    	"wizard": [
+      		"Configurations"
+    	],
+		"tags": ["${{values.category}}"]
 	},
 	"ref": "github.com/${{values.owner}}/flogo-enterprise-hub/extensions/${{values.extensionName}}/trigger/${{values.triggerName}}",
-	"settings": [],
 	"handler": {
 		"settings": [
 {%- if(values.hasSettingsString === 'yes') %}
@@ -25,8 +28,10 @@
 					"required": true,
                     "type": "string",
                     "appPropertySupport": true
-                },
-                "value": ""
+                },       
+				"wizard": {
+          			"step": "Configurations"
+        		}
             }
 {%- endif %}			
 {%- if(values.hasSettingsString === 'yes' and (values.hasSettingsBoolean === 'yes' or values.hasSettingsDropdown === 'yes' or values.hasSettingsDateTime === 'yes' or values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}
@@ -40,31 +45,37 @@
 					"name": "Boolean",
 					"description": "This description appears on tooltip hover."
 				},
+				"wizard": {
+          			"step": "Configurations"
+        		},				
 				"value": false,
 				"required": true
 			}
 {%- endif %}
 {%- if(values.hasSettingsBoolean === 'yes' and (values.hasSettingsDropdown === 'yes' or values.hasSettingsDateTime === 'yes' or values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}       
-        ,
+        	,
 {%- endif %}        
 {%- if(values.hasSettingsDropdown === 'yes') %}
 			{
                 "name": "aSettingStringDropdown",
                 "type": "string",
                 "required": true,
+                "allowed": [
+                    "Option 1",
+                    "Option 2",
+					"Option 3"
+                ],
+				"value": "Option 3",
                 "display": {
                     "name": "Dropdown Options",
                     "description": "This description appears on tooltip hover.",
                     "type": "dropdown",
                     "selection": "single"
                 },
-                "value": "Timer",
-                "allowed": [
-                    "Option 1",
-                    "Option 2",
-					"Option 3"
-                ]
-            }
+        		"wizard": {
+          			"step": "Configurations"
+        		}
+            }  
 {%- endif %}
 {%- if(values.hasSettingsDropdown === 'yes' and (values.hasSettingsDateTime === 'yes' or values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}       
 			,
@@ -78,8 +89,11 @@
 					"type": "dateTime",
 					"description": "This description appears on tooltip hover.",
 					"appPropertySupport": true
-				}
-			}
+				},
+        		"wizard": {
+          			"step": "Configurations"
+        		}
+			} 
 {%- endif %}
 {%- if(values.hasSettingsDateTime === 'yes' and (values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}       
 			,
@@ -88,31 +102,48 @@
 			{
 				"name": "aSettingInteger",
 				"type": "integer",
+				"required": true,
+				"value": 1,
 				"display": {
 					"name": "Integer",
 					"description": "This description appears on tooltip hover.",
 					"appPropertySupport": true
 				},
-				"value": 1,
-				"required": true
+        		"wizard": {
+          			"step": "Configurations"
+        		}
 			}
 {%- endif %}
 {%- if(values.hasSettingsInteger === 'yes' and (values.hasSettingsNumber === 'yes')) %}       
 			,
 {%- endif %}
 {%- if(values.hasSettingsNumber === 'yes') %}       
-       	 	{
-            	"name": "aSettingNumber",
-            	"type": "number",
+			{
+				"name": "aSettingNumber",
+				"type": "number",
+				"required": true,
+				"value": 1.0,
 				"display": {
 					"name": "Numeric",
 					"description": "This description appears on tooltip hover.",
 					"appPropertySupport": true
 				},
-				"value": 1.0,
-            	"required": true
-        	}
-{%- endif %}
+        		"wizard": {
+          			"step": "Configurations"
+        		}
+			}
+{%- endif %}	
 		]
-	}
+	},
+ 	"outputs": [
+    	{
+        	"name": "output",
+        	"type": "object"
+    	}
+  	],
+  	"actions": [
+    {
+      		"name": "Finish"
+    }
+  ]
 }
