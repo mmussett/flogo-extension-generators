@@ -9,14 +9,14 @@
         "visible": true,
         "description": "",
         "smallIcon": "icons/activity-icon@2x.png",
-		"largeIcon": "icons/activity-icon@3x.png"
+	"largeIcon": "icons/activity-icon@3x.png"
     },
     "feature": {
         "retry": {
             "enabled": true
         }
     },
-    "ref": "github.com/${{values.owner}}/flogo-enterprise-hub/extensions/${{values.category}}/activity/${{values.activityName}}",
+    "ref": "github.com/${{values.owner}}/flogo-enterprise-hub/extensions/${{values.extensionName}}/activity/${{values.activityName}}",
     "settings": [
 {%- if(values.hasSettingsString === 'yes') %}
         {
