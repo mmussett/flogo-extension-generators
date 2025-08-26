@@ -15,7 +15,7 @@
 	"ref": "github.com/${{values.owner}}/flogo-enterprise-hub/extensions/${{values.extensionName}}/trigger/${{values.triggerName}}",
 	"handler": {
 		"settings": [
-{%- if(values.hasSettingsString === 'yes') %}
+{%- if(values.hasHandlerString === 'yes') %}
 			{
                 "name": "aSettingString",
                 "type": "string",
@@ -28,10 +28,10 @@
                 }
             }
 {%- endif %}			
-{%- if(values.hasSettingsString === 'yes' and (values.hasSettingsBoolean === 'yes' or values.hasSettingsDropdown === 'yes' or values.hasSettingsDateTime === 'yes' or values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}
+{%- if(values.hasHandlerString === 'yes' and (values.hasHandlerBoolean === 'yes' or values.hasHandlerDropdown === 'yes' or values.hasHandlerDateTime === 'yes' or values.hasHandlerInteger === 'yes' or values.hasHandlerNumber === 'yes')) %}
 			,
 {%- endif %}
-{%- if(values.hasSettingsBoolean === 'yes') %}
+{%- if(values.hasHandlerBoolean === 'yes') %}
 			{
 				"name": "aSettingBoolean",
 				"type": "boolean",
@@ -43,10 +43,10 @@
 				"required": true
 			}
 {%- endif %}
-{%- if(values.hasSettingsBoolean === 'yes' and (values.hasSettingsDropdown === 'yes' or values.hasSettingsDateTime === 'yes' or values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}       
+{%- if(values.hasHandlerBoolean === 'yes' and (values.hasHandlerDropdown === 'yes' or values.hasHandlerDateTime === 'yes' or values.hasHandlerInteger === 'yes' or values.hasHandlerNumber === 'yes')) %}       
         	,
 {%- endif %}        
-{%- if(values.hasSettingsDropdown === 'yes') %}
+{%- if(values.hasHandlerDropdown === 'yes') %}
 			{
                 "name": "aSettingStringDropdown",
                 "type": "string",
@@ -65,10 +65,10 @@
                 }
             }  
 {%- endif %}
-{%- if(values.hasSettingsDropdown === 'yes' and (values.hasSettingsDateTime === 'yes' or values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}       
+{%- if(values.hasHandlerDropdown === 'yes' and (values.hasHandlerDateTime === 'yes' or values.hasHandlerInteger === 'yes' or values.hasHandlerNumber === 'yes')) %}       
 			,
 {%- endif %} 
-{%- if(values.hasSettingsDateTime === 'yes') %}       
+{%- if(values.hasHandlerDateTime === 'yes') %}       
 			{
 				"name": "aSettingDateTime",
 				"type": "string",
@@ -77,16 +77,13 @@
 					"type": "dateTime",
 					"description": "This description appears on tooltip hover.",
 					"appPropertySupport": true
-				},
-        		"wizard": {
-          			"step": "Configurations"
-        		}
+				}
 			} 
 {%- endif %}
-{%- if(values.hasSettingsDateTime === 'yes' and (values.hasSettingsInteger === 'yes' or values.hasSettingsNumber === 'yes')) %}       
+{%- if(values.hasHandlerDateTime === 'yes' and (values.hasHandlerInteger === 'yes' or values.hasHandlerNumber === 'yes')) %}       
 			,
 {%- endif %} 
-{%- if(values.hasSettingsInteger === 'yes') %}       
+{%- if(values.hasHandlerInteger === 'yes') %}       
 			{
 				"name": "aSettingInteger",
 				"type": "integer",
@@ -99,10 +96,10 @@
 				}
 			}
 {%- endif %}
-{%- if(values.hasSettingsInteger === 'yes' and (values.hasSettingsNumber === 'yes')) %}       
+{%- if(values.hasHandlerInteger === 'yes' and (values.hasHandlerNumber === 'yes')) %}       
 			,
 {%- endif %}
-{%- if(values.hasSettingsNumber === 'yes') %}       
+{%- if(values.hasHandlerNumber === 'yes') %}       
 			{
 				"name": "aSettingNumber",
 				"type": "number",

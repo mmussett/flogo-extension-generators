@@ -96,65 +96,6 @@ spec:
       required:
         - triggerList
 
-    - title: Trigger Settings Configuration
-      required:
-        - hasConnectionManager
-        - hasSettingsString
-        - hasSettingsBoolean
-        - hasSettingsDropdown
-        - hasSettingsDateTime
-        - hasSettingsInteger
-        - hasSettingsDecimal
-      properties:
-        hasConnectionManager:
-          title: Scaffolder to generate Trigger with connection manager support?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no          
-        hasSettingsString:
-          title: Scaffolder to generate Trigger with settings string field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: yes  
-        hasSettingsBoolean:
-          title: Scaffolder to generate Trigger with settings boolean field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasSettingsDropdown:
-          title: Scaffolder to generate Trigger with settings dropdown field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasSettingsDateTime:
-          title: Scaffolder to generate Trigger with settings date-time field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasSettingsInteger:
-          title: Scaffolder to generate Trigger with settings integer field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasSettingsDecimal:
-          title: Scaffolder to generate Trigger with settings decimal field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no  
 
     - title: Trigger Handler Configuration
       required:
@@ -354,19 +295,12 @@ spec:
           version: ${{ parameters.version }}
           triggerName: ${{ each.value }}
           hasConnectionManager: ${{ parameters.hasConnectionManager }}
-          hasSettingsString: ${{ parameters.hasSettingsString }}
-          hasSettingsBoolean: ${{ parameters.hasSettingsBoolean }}
-          hasSettingsDropdown: ${{ parameters.hasSettingsDropdown }}
-          hasSettingsDateTime: ${{ parameters.hasSettingsDateTime }}
-          hasSettingsInteger: ${{ parameters.hasSettingsInteger }}
-          hasSettingsDecimal: ${{ parameters.hasSettingsDecimal }}
-          hasInputString: ${{ parameters.hasInputString }}
-          hasInputBoolean: ${{ parameters.hasInputBoolean }}
-          hasInputInteger: ${{ parameters.hasInputInteger }}
-          hasInputDecimal: ${{ parameters.hasInputDecimal }}
-          hasInputObject: ${{ parameters.hasInputObject }}
-          hasInputObjectWithSchema: ${{ parameters.hasInputObjectWithSchema }}
-          hasInputParameters: ${{ parameters.hasInputParameters }}
+          hasHandlerString: ${{ parameters.hasHandlerString }}
+          hasHandlerBoolean: ${{ parameters.hasHandlerBoolean }}
+          hasHandlerDropdown: ${{ parameters.hasHandlerDropdown }}
+          hasHandlerDateTime: ${{ parameters.hasHandlerDateTime }}
+          hasHandlerInteger: ${{ parameters.hasHandlerInteger }}
+          hasHandlerDecimal: ${{ parameters.hasHandlerDecimal }}
           hasOutputString: ${{ parameters.hasOutputString }}
           hasOutputBoolean: ${{ parameters.hasOutputBoolean }}
           hasOutputInteger: ${{ parameters.hasOutputInteger }}
@@ -384,23 +318,17 @@ spec:
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
+          owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
           category: ${{ parameters.category }}
           version: ${{ parameters.version }}
           triggerName: ${{ each.value }}
-          hasConnection: ${{ parameters.scaffoldConnector }}
-          hasSettingsString: ${{ parameters.hasSettingsString }}
-          hasSettingsBoolean: ${{ parameters.hasSettingsBoolean }}
-          hasSettingsDropdown: ${{ parameters.hasSettingsDropdown }}
-          hasSettingsDateTime: ${{ parameters.hasSettingsDateTime }}
-          hasSettingsInteger: ${{ parameters.hasSettingsInteger }}
-          hasSettingsDecimal: ${{ parameters.hasSettingsDecimal }}
-          hasInputString: ${{ parameters.hasInputString }}
-          hasInputBoolean: ${{ parameters.hasInputBoolean }}
-          hasInputInteger: ${{ parameters.hasInputInteger }}
-          hasInputDecimal: ${{ parameters.hasInputDecimal }}
-          hasInputObject: ${{ parameters.hasInputObject }}
-          hasInputObjectWithSchema: ${{ parameters.hasInputObjectWithSchema }}
-          hasInputParameters: ${{ parameters.hasInputParameters }}
+          hasConnectionManager: ${{ parameters.hasConnectionManager }}
+          hasHandlerString: ${{ parameters.hasHandlerString }}
+          hasHandlerBoolean: ${{ parameters.hasHandlerBoolean }}
+          hasHandlerDropdown: ${{ parameters.hasHandlerDropdown }}
+          hasHandlerDateTime: ${{ parameters.hasHandlerDateTime }}
+          hasHandlerInteger: ${{ parameters.hasHandlerInteger }}
+          hasHandlerDecimal: ${{ parameters.hasHandlerDecimal }}
           hasOutputString: ${{ parameters.hasOutputString }}
           hasOutputBoolean: ${{ parameters.hasOutputBoolean }}
           hasOutputInteger: ${{ parameters.hasOutputInteger }}
