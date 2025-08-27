@@ -18,3 +18,4 @@ spec:
   targets:
     - ./simple-activity-generator/simple-activity-generator-v1.yaml
     - ./simple-trigger-generator/simple-trigger-generator-v1.yaml
+    - ./simple-function-generator/simple-function-generator-v1.yaml
