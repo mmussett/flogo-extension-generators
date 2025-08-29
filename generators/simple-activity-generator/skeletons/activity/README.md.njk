@@ -1,15 +1,23 @@
-# TIBCO Flogo® Extension for ${{ values.extensionName }} 
+# TIBCO Flogo® Extension for ${{values.extensionName}}
 
-## Activity ${{ values.activityName}}
+## Activity ${{values.activity.activityName}}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dapibus molestie elit, in maximus justo sagittis ut. Aenean id placerat mi, vel aliquet quam. Vivamus at sollicitudin ligula, vel accumsan est. Etiam imperdiet elit quis nunc facilisis, ut sodales diam tincidunt. Donec sit amet feugiat metus. In convallis dictum magna a iaculis. Ut consequat magna nec nunc congue vulputate a ac felis. Etiam a commodo arcu. Donec semper urna vel facilisis suscipit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
 
 ## Settings
 
 
+The Settings tab has the following fields:
+
+| Field	| Type | Required	| Description |
+|-------|------|-----------|-------------|
+{% for o in values.activity.settings %}	
+| ${{ o.fieldName }} | ${{ o.fieldType }} | ${{o.isRequired }} | Lorum ipsum |
+{%- endfor %}
+
 ### Input Settings
 
-The Input Settings tab has the following fields:
+The Input tab has the following fields:
 
 | Field	| Type | Required	| Description |
 |-------|------|-----------|-------------|

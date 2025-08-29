@@ -84,158 +84,225 @@ spec:
           description: Overview of the extension
           default: "This extension provides the following features..."
 
-    - title: Activity Details
-      properties:
-        activityList:
-          title: List of activities
-          description: "Provide a list of one or more activity names"
-          type: array
-          items:
-            type: string
-            title: Activitiy Name
-
+    - title: Activity Configurator
       required:
         - activityList
-
-    - title: Activity Settings Configuration
-      required:
-        - hasSettingsString
-        - hasSettingsBoolean
-        - hasSettingsDropdown
       properties:
-        hasSettingsString:
-          title: Scaffolder to generate activity with settings string field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: yes          
-        hasSettingsBoolean:
-          title: Scaffolder to generate activity with settings boolean field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasSettingsDropdown:
-          title: Scaffolder to generate activity with settings dropdown list field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
+        activityList:
+          title: List of activities and their signatures provided by the package
+          description: "Provide a list of one or more activities with their signatures"
+          type: array
+          ui:options:
+            addable: true
+            removable: true
+          items:
+            type: object
+            required:
+              - activityName
+              - settings
+              - input
+              - output
+            properties:
+              activityName:
+                title: Activity Name
+                type: string
+                description: Name of the activity
+                ui:options:
+                  placeholder: "logger"
+              settings:
+                title: Activity settings field definition
+                type: array
+                description: Settings configuration
+                ui:options:
+                  addable: true
+                  removable: true
+                items:
+                  type: object
+                  required:
+                    - fieldName
+                    - fieldType
+                    - description
+                    - isRequired
+                    - isAppPropertySupport
+                  properties:
+                    fieldName:
+                      title: Field Name
+                      type: string
+                      description: Name of the field
+                      ui:options:
+                        placeholder: "fieldName"
+                      ui:className: font-semibold
+                    fieldType:
+                      title: Field Data Type
+                      type: string
+                      description: Data type of the field
+                      enum:
+                        - string
+                        - int
+                        - number
+                        - boolean
+                        - datetime
+                        - object
+                        - any
+                      enumNames:
+                        - "A String (text data)"
+                        - "An Integer (whole numbers)"
+                        - "A a Number (decimal numbers)"
+                        - "A a Boolean (true/false)"
+                        - "A a DateTime (date and time)"
+                        - "An Object (complex data)"
+                        - "An Any (any type)"
+                      default: string
+                      ui:field: Select
+                      ui:options:
+                        placeholder: "Select data type"
+                    description:
+                      title: Field Description
+                      type: string
+                      description: Description of the field
+                      ui:options:
+                        placeholder: "This description appears on tooltip hover"
+                      ui:className: font-semibold                    
+                    isRequired:
+                      title: Field is Required
+                      type: boolean
+                      default: true
+                      description: Is this a required/mandatory field?
+                      ui:widget: checkbox
+                      ui:options:
+                        - label: false
+                    isAppPropertySupport:
+                      title: Application property supported
+                      type: boolean
+                      default: true
+                      description: Can be set via application properties?
+                      ui:widget: checkbox
+                      ui:options:
+                        - label: false
 
-    - title: Activity Input Configuration
-      required:
-        - hasInputString
-        - hasInputBoolean
-        - hasInputInteger
-        - hasInputDecimal
-        - hasInputObject
-        - hasInputObjectWithSchema
-        - hasInputParameters
-      properties:
-        hasInputString:
-          title: Scaffolder to generate activity with input string field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: yes          
-        hasInputBoolean:
-          title: Scaffolder to generate activity with input boolean field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasInputInteger:
-          title: Scaffolder to generate activity with input integer field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasInputDecimal:
-          title: Scaffolder to generate activity with input decimal field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasInputObject:
-          title: Scaffolder to generate activity with input object field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasInputObjectWithSchema:
-          title: Scaffolder to generate activity with input object with schema field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasInputParameters:
-          title: Scaffolder to generate activity with input parameter field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
+              input:
+                title: Activity input field definition
+                type: array
+                description: Input configuration
+                ui:options:
+                  addable: true
+                  removable: true
+                items:
+                  type: object
+                  required:
+                    - fieldName
+                    - fieldType
+                    - description
+                    - isRequired
+                  properties:
+                    fieldName:
+                      title: Field Name
+                      type: string
+                      description: Name of the field
+                      ui:options:
+                        placeholder: "fieldName"
+                      ui:className: font-semibold
+                    fieldType:
+                      title: Field Data Type
+                      type: string
+                      description: Data type of the field
+                      enum:
+                        - string
+                        - int
+                        - number
+                        - boolean
+                        - datetime
+                        - object
+                        - any
+                      enumNames:
+                        - "A String (text data)"
+                        - "An Integer (whole numbers)"
+                        - "A a Number (decimal numbers)"
+                        - "A a Boolean (true/false)"
+                        - "A a DateTime (date and time)"
+                        - "An Object (complex data)"
+                        - "An Any (any type)"
+                      default: string
+                      ui:field: Select
+                      ui:options:
+                        placeholder: "Select data type"
+                    description:
+                      title: Field Description
+                      type: string
+                      description: Description of the field
+                      ui:options:
+                        placeholder: "This description appears on tooltip hover"
+                      ui:className: font-semibold                    
+                    isRequired:
+                      title: Field is Required
+                      type: boolean
+                      description: Is this a required/mandatory field?
+                      default: true
+                      ui:widget: checkbox
+                      ui:options:
+                        - label: false
+              output:
+                title: Activity output field definition
+                type: array
+                description: Output configuration
+                ui:options:
+                  addable: true
+                  removable: true
+                items:
+                  type: object
+                  required:
+                    - fieldName
+                    - fieldType
+                    - description
+                    - isRequired
+                  properties:
+                    fieldName:
+                      title: Field Name
+                      type: string
+                      description: Name of the field
+                      ui:options:
+                        placeholder: "fieldName"
+                      ui:className: font-semibold
+                    fieldType:
+                      title: Field Data Type
+                      type: string
+                      description: Data type of the field
+                      enum:
+                        - string
+                        - int
+                        - number
+                        - boolean
+                        - datetime
+                        - object
+                        - any
+                      enumNames:
+                        - "A String (text data)"
+                        - "An Integer (whole numbers)"
+                        - "A a Number (decimal numbers)"
+                        - "A a Boolean (true/false)"
+                        - "A a DateTime (date and time)"
+                        - "An Object (complex data)"
+                        - "An Any (any type)"
+                      default: string
+                      ui:field: Select
+                      ui:options:
+                        placeholder: "Select data type"
+                    description:
+                      title: Field Description
+                      type: string
+                      description: Description of the field
+                      ui:options:
+                        placeholder: "This description appears on tooltip hover"
+                      ui:className: font-semibold                    
+                    isRequired:
+                      title: Field is Required
+                      type: boolean
+                      description: Is this a required/mandatory field?
+                      default: true
+                      ui:widget: checkbox
+                      ui:options:
+                        - label: false
 
-    - title: Activity Output Configuration
-      required:
-        - hasOutputString
-        - hasOutputBoolean
-        - hasOutputInteger
-        - hasOutputDecimal
-        - hasOutputObject
-        - hasOutputObjectWithSchema
-      properties:
-        hasOutputString:
-          title: Scaffolder to generate Activity with String output field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: yes          
-        hasOutputBoolean:
-          title: Scaffolder to generate Activity with String output field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasOutputInteger:
-          title: Scaffolder to generate Activity with String output field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasOutputDecimal:
-          title: Scaffolder to generate Activity with String output field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasOutputObject:
-          title: Scaffolder to generate Activity with String output field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasOutputObjectWithSchema:
-          title: Scaffolder to generate Activity with String output field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
 
 
   # The import flow consist out of 4 steps:
@@ -275,14 +342,14 @@ spec:
       each: ${{ parameters.activityList}}
       action: file:makeDirectory
       input:
-        dirPath: ${{ "extensions/" + parameters.extensionName + "/src/activity/" + each.value }}      
+        dirPath: ${{ "extensions/" + parameters.extensionName + "/src/activity/" + each.value.activityName }}      
 
     - id: makeActivityIconSubFolder
       name: Make activity sub-folder under src/activity
       each: ${{ parameters.activityList}}
       action: file:makeDirectory
       input:
-        dirPath: ${{ "extensions/" + parameters.extensionName + "/src/activity/" + each.value + "/icons"}}      
+        dirPath: ${{ "extensions/" + parameters.extensionName + "/src/activity/" + each.value.activityName + "/icons"}}      
 
     - id: makeActivityIcons
       name: Make activity icons
@@ -290,7 +357,7 @@ spec:
       action: fetch:template
       input:
         url: ./skeletons/activity/icons
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/activity/" + each.value + "/icons" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/activity/" + each.value.activityName + "/icons" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
@@ -301,12 +368,15 @@ spec:
       each: ${{ parameters.activityList}}
       action: fetch:template:file
       input:
-        url: ./skeletons/activity/README.md
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/activity/" + each.value + "/README.md" }}
+        url: ./skeletons/activity/README.md.njk
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/activity/" + each.value.activityName + "/README.md" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
-          activityName: ${{ each.value }}
+          owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
+          category: ${{ parameters.category }}
+          version: ${{ parameters.version }}
+          activity: ${{ each.value }}
 
     - id: generateActivityJson
       name: Generate activity.json
@@ -314,31 +384,15 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/activity/activity.json.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/activity/" + each.value + "/activity.json" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/activity/" + each.value.activityName + "/activity.json" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
           owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
           category: ${{ parameters.category }}
           version: ${{ parameters.version }}
-          activityName: ${{ each.value }}
-          hasConnection: ${{ parameters.scaffoldConnector }}
-          hasSettingsString: ${{ parameters.hasSettingsString }}
-          hasSettingsBoolean: ${{ parameters.hasSettingsBoolean }}
-          hasSettingsDropdown: ${{ parameters.hasSettingsDropdown }}
-          hasInputString: ${{ parameters.hasInputString }}
-          hasInputBoolean: ${{ parameters.hasInputBoolean }}
-          hasInputInteger: ${{ parameters.hasInputInteger }}
-          hasInputDecimal: ${{ parameters.hasInputDecimal }}
-          hasInputObject: ${{ parameters.hasInputObject }}
-          hasInputObjectWithSchema: ${{ parameters.hasInputObjectWithSchema }}
-          hasInputParameters: ${{ parameters.hasInputParameters }}
-          hasOutputString: ${{ parameters.hasOutputString }}
-          hasOutputBoolean: ${{ parameters.hasOutputBoolean }}
-          hasOutputInteger: ${{ parameters.hasOutputInteger }}
-          hasOutputDecimal: ${{ parameters.hasOutputDecimal }}
-          hasOutputObject: ${{ parameters.hasOutputObject }}
-          hasOutputObjectWithSchema: ${{ parameters.hasOutputObjectWithSchema }}
+          activity: ${{ each.value }}
+
           
     - id: generateMetadataGo
       name: Generate metadata.go
@@ -346,30 +400,14 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/activity/metadata.go.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/activity/" + each.value + "/metadata.go" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/activity/" +  each.value.activityName + "/metadata.go" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
+          owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
           category: ${{ parameters.category }}
           version: ${{ parameters.version }}
-          activityName: ${{ each.value }}
-          hasConnection: ${{ parameters.scaffoldConnector }}
-          hasSettingsString: ${{ parameters.hasSettingsString }}
-          hasSettingsBoolean: ${{ parameters.hasSettingsBoolean }}
-          hasSettingsDropdown: ${{ parameters.hasSettingsDropdown }}
-          hasInputString: ${{ parameters.hasInputString }}
-          hasInputBoolean: ${{ parameters.hasInputBoolean }}
-          hasInputInteger: ${{ parameters.hasInputInteger }}
-          hasInputDecimal: ${{ parameters.hasInputDecimal }}
-          hasInputObject: ${{ parameters.hasInputObject }}
-          hasInputObjectWithSchema: ${{ parameters.hasInputObjectWithSchema }}
-          hasInputParameters: ${{ parameters.hasInputParameters }}
-          hasOutputString: ${{ parameters.hasOutputString }}
-          hasOutputBoolean: ${{ parameters.hasOutputBoolean }}
-          hasOutputInteger: ${{ parameters.hasOutputInteger }}
-          hasOutputDecimal: ${{ parameters.hasOutputDecimal }}
-          hasOutputObject: ${{ parameters.hasOutputObject }}
-          hasOutputObjectWithSchema: ${{ parameters.hasOutputObjectWithSchema }}
+          activity: ${{ each.value }}
 
     - id: generateActivityGo
       name: Generate activity.go
@@ -377,32 +415,38 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/activity/activity.go.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/activity/" + each.value + "/activity.go" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/activity/" + each.value.activityName + "/activity.go" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
+          owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
           category: ${{ parameters.category }}
           version: ${{ parameters.version }}
-          activityName: ${{ each.value }}
-          hasConnection: ${{ parameters.scaffoldConnector }}
+          activity: ${{ each.value }}
 
-    - id: generateActivityTestGo
-      name: Generate activity_test.go
-      each: ${{ parameters.activityList}}
-      action: fetch:template:file
-      input:
-        url: ./skeletons/activity/activity_test.go.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/activity/" + each.value + "/activity_test.go" }}
-        replace: true
-        values:
-          activityName: ${{ each.value }}
+#    - id: generateActivityTestGo
+#      name: Generate activity_test.go
+#      each: ${{ parameters.activityList}}
+#      action: fetch:template:file
+#      input:
+#        url: ./skeletons/activity/activity_test.go.njk
+#        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/activity/" + each.value + "/activity_test.go" }}
+#        replace: true
+#        values:
+#          extensionName: ${{ parameters.extensionName }}
+#          category: ${{ parameters.category }}
+#          version: ${{ parameters.version }}
+#          activityName: ${{ each.value.activityName }}
+#          settings: ${{ each.value.settings }}
+#          input: ${{ each.value.input }}
+#          outout: ${{ each.value.output }}
 
     - id: generateGoMod
       name: Generate go.mod
       action: fetch:template:file
       input:
         url: ./skeletons/go.mod.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/go.mod" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/go.mod" }}
         replace: true
         values:
           owner:   ${{ (parameters.repoUrl | parseRepoUrl).owner }}
@@ -413,7 +457,7 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/README.md
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/README.md" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src//README.md" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
