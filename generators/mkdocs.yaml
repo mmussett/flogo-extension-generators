@@ -1,8 +1,0 @@
-site_name: 'TIBCO Flogo Extension Generators'
-site_description: 'TIBCO Flogo Extension Generators'
-
-nav:
-  - Introduction: index.md
-
-plugins:
-  - techdocs-core

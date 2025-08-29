@@ -86,7 +86,7 @@ spec:
         - functionList
       properties:
         functionList:
-          title: List of functions provided by the package
+          title: List of functions and their arguments provided by the package
           description: "Provide a list of one or more functions with their signatures"
           type: array
           ui:options:
@@ -119,7 +119,15 @@ spec:
               returnType:
                 title: Return Type
                 type: string
-                description: Return type of the function
+                description: |
+                  Return type of the function:
+                  • string - text data
+                  • int - whole numbers
+                  • number - decimal numbers  
+                  • boolean - true/false values
+                  • datetime - date and time
+                  • object - complex data structures
+                  • any - any data type
                 enum:
                   - string
                   - int
@@ -128,10 +136,18 @@ spec:
                   - datetime
                   - object
                   - any
+                enumNames:
+                  - "Returns a String (text data)"
+                  - "Returns a Integer (whole numbers)"
+                  - "Returns a Number (decimal numbers)"
+                  - "Returns a Boolean (true/false)"
+                  - "Returns a DateTime (date and time)"
+                  - "Returns an Object (complex data)"
+                  - "Returns an Any (any type)"
                 default: string
                 ui:field: Select
                 ui:options:
-                  placeholder: "Select return type"
+                  placeholder: "Select return type"         
               arguments:
                 title: Arguments
                 type: array
@@ -151,6 +167,7 @@ spec:
                       description: Name of the argument
                       ui:options:
                         placeholder: "arg1"
+                      ui:className: font-semibold
                     argType:
                       title: Argument Type
                       type: string
@@ -163,6 +180,14 @@ spec:
                         - datetime
                         - object
                         - any
+                      enumNames:
+                        - "Accepts a String (text data)"
+                        - "Accepts a Integer (whole numbers)"
+                        - "Accepts a Number (decimal numbers)"
+                        - "Accepts a Boolean (true/false)"
+                        - "Accepts a DateTime (date and time)"
+                        - "Accepts an Object (complex data)"
+                        - "Accepts an Any (any type)"
                       default: string
                       ui:field: Select
                       ui:options:

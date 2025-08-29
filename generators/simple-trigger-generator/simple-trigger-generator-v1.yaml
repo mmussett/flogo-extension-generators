@@ -262,7 +262,7 @@ spec:
       action: fetch:template
       input:
         url: ./skeletons/trigger/icons
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/trigger/" + each.value + "/icons" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/icons" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
@@ -274,7 +274,7 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/trigger/README.md
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/trigger/" + each.value + "/README.md" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/README.md" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
@@ -286,7 +286,7 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/trigger/trigger.json.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/trigger/" + each.value + "/trigger.json" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/trigger.json" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
@@ -314,7 +314,7 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/trigger/metadata.go.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/trigger/" + each.value + "/metadata.go" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/metadata.go" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
@@ -342,7 +342,7 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/trigger/trigger.go.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/trigger/" + each.value + "/trigger.go" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/trigger.go" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
@@ -357,7 +357,7 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/trigger/trigger_test.go.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/trigger/" + each.value + "/trigger_test.go" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/trigger_test.go" }}
         replace: true
         values:
           triggerName: ${{ each.value }}
@@ -368,7 +368,7 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/go.mod.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/go.mod" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/go.mod" }}
         replace: true
         values:
           owner:   ${{ (parameters.repoUrl | parseRepoUrl).owner }}
@@ -379,7 +379,7 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/README.md
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/README.md" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/README.md" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
