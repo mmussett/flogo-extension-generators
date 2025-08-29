@@ -109,6 +109,22 @@ spec:
                 description: Name of the activity
                 ui:options:
                   placeholder: "logger"
+              overview:
+                title: Overview of the activity
+                type: string
+                description: Overview of the activity
+                ui:widget: textarea
+                ui:options:
+                  placeholder: "Overview of what this activity is about..."
+                  rows: 3
+              description:
+                title: Description of the activity
+                type: string
+                description: Description of the activity
+                ui:widget: textarea
+                ui:options:
+                  placeholder: "Additional details about this activity..."
+                  rows: 3
               settings:
                 title: Activity settings field definition
                 type: array
@@ -376,6 +392,8 @@ spec:
           owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
           category: ${{ parameters.category }}
           version: ${{ parameters.version }}
+          description: ${{ parameters.description }}
+          overview: ${{ parameters.overview }}
           activity: ${{ each.value }}
 
     - id: generateActivityJson
