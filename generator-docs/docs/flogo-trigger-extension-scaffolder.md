@@ -4,7 +4,7 @@ This template is used to scaffold a Flogo Trigger Extension. It will populate th
 
 Navigate to the Develop a new component section under TIBCO Developer Hub. You will see a tile named 'Flogo Trigger Extension Scaffolder':
 
-<img src="./images/scaffolder.png" alt="scaffolder" style="width:400px;"/>
+<img src="./images/simple-trigger-generator-scaffolder.png" alt="scaffolder" style="width:400px;"/>
 
 
 ## What you’ll need to do first...
@@ -15,7 +15,7 @@ TIBCO Developer Hub templates uses and store your artefacts in Github. You'll ne
 ### Fork the Official TIBCO Flogo Enterprise Repository
 Head over to [Flogo Enterprise Github Repository](https://github.com/TIBCOSoftware/flogo-enterprise-hub) and fork it to your Github account. 
 
-<img src="./images/repository-fork.png" alt="fork" style="width:400px;"/>
+<img src="./images/simple-trigger-generator-repository-fork.png" alt="fork" style="width:400px;"/>
 
 
 Any new extensions you create using the Flogo Extension Generator templates will be placed under the extensions folder in this repository.
@@ -25,7 +25,7 @@ Any new extensions you create using the Flogo Extension Generator templates will
 
 ### Step 1 - Flogo Enterprise Hub Repository Location
 
-<img src="./images/scaffolder-step1.png" alt="scaffolder-step1" style="width:800px;"/>
+<img src="./images/simple-trigger-generator-scaffolder-step1.png" alt="scaffolder-step1" style="width:800px;"/>
 
 Provide values for Owner, Repository, and Branch. The template will use these values to initiate a pull from this repository.
 
@@ -34,7 +34,7 @@ By default, the Repository name is 'flogo-enterprise-hub'. If you've forked the 
 
 ### Step 2 - Contribution Details
 
-<img src="./images/scaffolder-step2.png" alt="scaffolder-step2" style="width:800px;"/>
+<img src="./images/simple-trigger-generator-scaffolder-step2.png" alt="scaffolder-step2" style="width:800px;"/>
 
 
 Provide values for Category, ExtensionName, Version, Description, and Overview:
@@ -66,22 +66,22 @@ Example:
 
 | Section | |
 |--|--|
-| Details | <img src="./images/contribution-details-1.png" alt="review" style="width:800px;"/> |
-| Settings | <img src="./images/contribution-details-2.png" alt="review" style="width:800px;"/> |
-| Handler | <img src="./images/contribution-details-3.png" alt="review" style="width:800px;"/> |
-| Output | <img src="./images/contribution-details-4.png" alt="review" style="width:800px;"/> |
+| Details | <img src="./images/simple-trigger-generator-contribution-details-1.png" alt="review" style="width:800px;"/> |
+| Settings | <img src="./images/simple-trigger-generator-contribution-details-2.png" alt="review" style="width:800px;"/> |
+| Handler | <img src="./images/simple-trigger-generator-contribution-details-3.png" alt="review" style="width:800px;"/> |
+| Output | <img src="./images/simple-trigger-generator-contribution-details-4.png" alt="review" style="width:800px;"/> |
 
 
 
 ### Step 4 - Review
 
 
-<img src="./images/review.png" alt="review" style="width:800px;"/>
+<img src="./images/simple-trigger-generator-review.png" alt="review" style="width:800px;"/>
 
 ### Step 5 - Run
 
 
-<img src="./images/run.png" alt="run" style="width:800px;"/>
+<img src="./images/simple-trigger-generator-run.png" alt="run" style="width:800px;"/>
 
 
 

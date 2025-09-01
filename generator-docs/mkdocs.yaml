@@ -3,9 +3,9 @@ site_description: 'TIBCO Flogo Extension Generators'
 
 nav:
   - Introduction: ./index.md
-  - Activity Scaffolder: ./simple-activity-generator/flogo-activity-extension-scaffolder.md
-  - Trigger Scaffolder: ./simple-trigger-generator/flogo-trigger-extension-scaffolder.md
-  - Function Scaffolder: ./simple-function-generator/flogo-function-extension-scaffolder.md
+  - Activity Scaffolder: ./flogo-activity-extension-scaffolder.md
+  - Trigger Scaffolder: ./flogo-trigger-extension-scaffolder.md
+  - Function Scaffolder: ./flogo-function-extension-scaffolder.md
 
 
 plugins:
