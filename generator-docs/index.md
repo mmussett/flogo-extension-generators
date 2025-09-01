@@ -8,6 +8,5 @@ With this template, you can now create extension for:
 
 * Activities
 * Triggers
-* Connectors
 * Functions
 
