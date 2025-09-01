@@ -61,7 +61,10 @@ func (t *Trigger) Initialize(ctx trigger.InitContext) error {
 
 func (t *Trigger) Start() error {
 
+	// Start the trigger
 	t.logger.Infof("Starting %s...", t.name)
+
+
 
 	return nil
 }
