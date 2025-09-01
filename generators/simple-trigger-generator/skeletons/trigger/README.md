@@ -1,25 +1,33 @@
-# TIBCO Flogo® Extension for ${{ values.extensionName }} 
+# TIBCO Flogo® Extension for ${{values.extensionName}} - ${{values.description}}
 
-## Trigger ${{ values.triggerName}}
+${{values.overview}}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dapibus molestie elit, in maximus justo sagittis ut. Aenean id placerat mi, vel aliquet quam. Vivamus at sollicitudin ligula, vel accumsan est. Etiam imperdiet elit quis nunc facilisis, ut sodales diam tincidunt. Donec sit amet feugiat metus. In convallis dictum magna a iaculis. Ut consequat magna nec nunc congue vulputate a ac felis. Etiam a commodo arcu. Donec semper urna vel facilisis suscipit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
+## Trigger ${{values.trigger.triggerName}}
+
+${{values.trigger.overview}}
+
+${{values.trigger.description}}
+
 
 ## Settings
 
 
-### Handler Settings
-
-The Handler Settings tab has the following fields:
+The Settings tab has the following fields:
 
 | Field	| Type | Required	| Description |
 |-------|------|-----------|-------------|
-| anInput  | string | yes | a string field  |
+{% for o in values.trigger.settings %}| ${{ o.fieldName }} | ${{ o.fieldType }} | ${{o.isRequired }} | ${{o.description}} |
+{% endfor %}
+
+### Handler
 
 
+| Field	| Type | Required	| Description |
+|-------|------|-----------|-------------|
+{% for o in values.trigger.handler %}| ${{ o.fieldName }} | ${{ o.fieldType }} | ${{o.isRequired }} | ${{o.description}} |
+{% endfor %}
 
-### Input
 
-None
 
 
 ### Output Settings
@@ -27,6 +35,7 @@ The Output Settings tab has the following field:
 
 | Field	| Type | Description |
 |-------|-----------|-------------|
-| anOutput  | string | a string field  |
+{% for o in values.handler.output %}| ${{ o.fieldName }} | ${{ o.fieldType }} | ${{o.description}} |
+{% endfor %}
 
 

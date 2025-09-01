@@ -1,9 +1,9 @@
 {
-	"title": "${{values.triggerName}} Trigger",
-	"name": "${{values.triggerName}}",
-	"author": "Created by Flogo Extension Generator",
-	"version": "1.2.2",
+	"title": "${{values.trigger.triggerName}} Trigger",
+	"version": "${{values.version}}",
 	"type": "flogo:trigger",
+	"name": "${{values.trigger.triggerName}}",
+	"author": "Created by Flogo Extension Generator",
 	"display": {
 		"description": "${{values.triggerName}} trigger",
 		"category": "${{values.category}}",
@@ -15,162 +15,39 @@
 	"ref": "github.com/${{values.owner}}/flogo-enterprise-hub/extensions/${{values.extensionName}}/trigger/${{values.triggerName}}",
 	"handler": {
 		"settings": [
-{%- if(values.hasHandlerString === 'yes') %}
-			{
-                "name": "aSettingString",
-                "type": "string",
-                "display": {
-                    "name": "String",
-				    "description": "This description appears on tooltip hover.",
-					"required": true,
-                    "type": "string",
-                    "appPropertySupport": true
-                }
+{% for o in values.trigger.handler %}
+        {
+            "name": "${{o.fieldName}}",
+            "type": "${{o.fieldType}}",
+            "required": ${{o.isRequired}},
+            "description": "${{o.description}}",
+            "value":"Default_Value",
+            "display": {
+                "name": "${{o.fieldName}}",
+                "description": "${{o.description}}",
+                "required": ${{o.isRequired}},
+                "type":"${{o.fieldType}}",
+                "appPropertySupport": ${{o.isAppPropertySupport}}
             }
-{%- endif %}			
-{%- if(values.hasHandlerString === 'yes' and (values.hasHandlerBoolean === 'yes' or values.hasHandlerDropdown === 'yes' or values.hasHandlerDateTime === 'yes' or values.hasHandlerInteger === 'yes' or values.hasHandlerNumber === 'yes')) %}
-			,
-{%- endif %}
-{%- if(values.hasHandlerBoolean === 'yes') %}
-			{
-				"name": "aSettingBoolean",
-				"type": "boolean",
-				"display": {
-					"name": "Boolean",
-					"description": "This description appears on tooltip hover."
-				},			
-				"value": false,
-				"required": true
-			}
-{%- endif %}
-{%- if(values.hasHandlerBoolean === 'yes' and (values.hasHandlerDropdown === 'yes' or values.hasHandlerDateTime === 'yes' or values.hasHandlerInteger === 'yes' or values.hasHandlerNumber === 'yes')) %}       
-        	,
-{%- endif %}        
-{%- if(values.hasHandlerDropdown === 'yes') %}
-			{
-                "name": "aSettingStringDropdown",
-                "type": "string",
-                "required": true,
-                "allowed": [
-                    "Option 1",
-                    "Option 2",
-					"Option 3"
-                ],
-				"value": "Option 3",
-                "display": {
-                    "name": "Dropdown Options",
-                    "description": "This description appears on tooltip hover.",
-                    "type": "dropdown",
-                    "selection": "single"
-                }
-            }  
-{%- endif %}
-{%- if(values.hasHandlerDropdown === 'yes' and (values.hasHandlerDateTime === 'yes' or values.hasHandlerInteger === 'yes' or values.hasHandlerNumber === 'yes')) %}       
-			,
-{%- endif %} 
-{%- if(values.hasHandlerDateTime === 'yes') %}       
-			{
-				"name": "aSettingDateTime",
-				"type": "string",
-				"display": {
-					"name": "Date Time",
-					"type": "dateTime",
-					"description": "This description appears on tooltip hover.",
-					"appPropertySupport": true
-				}
-			} 
-{%- endif %}
-{%- if(values.hasHandlerDateTime === 'yes' and (values.hasHandlerInteger === 'yes' or values.hasHandlerNumber === 'yes')) %}       
-			,
-{%- endif %} 
-{%- if(values.hasHandlerInteger === 'yes') %}       
-			{
-				"name": "aSettingInteger",
-				"type": "integer",
-				"required": true,
-				"value": 1,
-				"display": {
-					"name": "Integer",
-					"description": "This description appears on tooltip hover.",
-					"appPropertySupport": true
-				}
-			}
-{%- endif %}
-{%- if(values.hasHandlerInteger === 'yes' and (values.hasHandlerNumber === 'yes')) %}       
-			,
-{%- endif %}
-{%- if(values.hasHandlerNumber === 'yes') %}       
-			{
-				"name": "aSettingNumber",
-				"type": "number",
-				"required": true,
-				"value": 1.0,
-				"display": {
-					"name": "Numeric",
-					"description": "This description appears on tooltip hover.",
-					"appPropertySupport": true
-				}
-			}
-{%- endif %}	
+        }{% if not loop.last %},{% endif %}
+{%- endfor %}
 		]
 	},
  	"outputs": [
-{%- if(values.hasOutputString === 'yes') %}
+{% for o in values.trigger.output %}
         {
-           "name": "anOutputString",
-           "type": "string"
-        }
-{%- endif %} 
-{%- if(values.hasOutputString === 'yes' and (values.hasOutputBoolean === 'yes' or values.hasOutputInteger === 'yes'  or values.hasOutputDecimal === 'yes' or values.hasOutputObject === 'yes' or values.hasOutputObjectWithSchema === 'yes')) %}                       
-        ,
-{%- endif %}
-{%- if(values.hasOutputBoolean === 'yes') %}
-        {
-            "name": "anOutputBoolean",
-            "type": "boolean"
-        }
-{%- endif %} 
-{%- if(values.hasOutputBoolean === 'yes' and (values.hasOutputInteger === 'yes'  or values.hasOutputDecimal === 'yes' or values.hasOutputObject === 'yes' or values.hasOutputObjectWithSchema === 'yes')) %}               
-        ,
-{%- endif %}
-{%- if(values.hasOutputInteger === 'yes') %}
-        {
-            "name": "anOutputInteger",
-            "type": "integer"
-        }
-{%- endif %} 
-{%- if(values.hasOutputInteger === 'yes'  and (values.hasOutputDecimal === 'yes' or values.hasOutputObject === 'yes' or values.hasOutputObjectWithSchema === 'yes')) %}             
-        ,
-{%- endif %}
-{%- if(values.hasOutputDecimal === 'yes') %}
-        {
-            "name": "anOutputDecimal",
-            "type": "number"
-        }
-{%- endif %} 
-{%- if(values.hasOutputDecimal === 'yes' and (values.hasOutputObject === 'yes' or values.hasOutputObjectWithSchema === 'yes')) %}          
-        ,
-{%- endif %}
-{%- if(values.hasOutputObject === 'yes') %}
-        {
-           "name": "anOutputObject",
-           "type": "object"
-        }
-{%- endif %} 
-{%- if(values.hasOutputObject === 'yes' or values.hasOutputObjectWithSchema === 'yes') %}          
-        ,
-{%- endif %}
-{%- if(values.hasOutputObjectWithSchema === 'yes') %}
-        {
-            "name": "anOutputObjectWithSchema",
-            "type": "object",
+           "name": "${{o.fieldName}}",
+           "type": "${{o.fieldType}}",
+           "required": ${{o.isRequired}}{% if o.fieldType == "object" %},
             "display": {
                 "name": "JSON Schema",
-                "description": "An example JSON object",
+                "description": "An example JSON-based object",
                 "type": "texteditor",
-                "syntax": "json"
-            }
-        }
-{%- endif %}
+                "syntax": "json",
+                "mappable": true,
+                "visible": true
+            }{% endif %}
+        }{% if not loop.last %},{% endif %}
+{%- endfor %}
   	]
 }

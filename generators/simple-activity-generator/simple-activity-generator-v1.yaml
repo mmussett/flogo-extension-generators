@@ -195,7 +195,6 @@ spec:
                       ui:widget: checkbox
                       ui:options:
                         - label: false
-
               input:
                 title: Activity input field definition
                 type: array

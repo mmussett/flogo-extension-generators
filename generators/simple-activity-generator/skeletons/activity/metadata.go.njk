@@ -67,7 +67,6 @@ func (i *Input) FromMap(values map[string]interface{}) error {
 	var err error
 
 {% for o in values.activity.input %}
-
 	// ${{o.fieldName}} ${{o.fieldType}} 
 	{% if o.fieldType == "string" %}
 	i. ${{o.fieldName | capitalize }}, err = coerce.ToString(values["${{ o.fieldName }}"])

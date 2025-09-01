@@ -84,130 +84,248 @@ spec:
           description: Overview of the extension
           default: "This extension provides the following features..."
 
-    - title: Trigger Details
-      properties:
-        triggerList:
-          title: List of triggers
-          description: "Provide a list of one or more trigger names"
-          type: array
-          items:
-            type: string
-            title: Trigger Name
+    - title: Trigger Configurator
       required:
         - triggerList
-
-
-    - title: Trigger Handler Configuration
-      required:
-        - hasHandlerString
-        - hasHandlerBoolean
-        - hasHandlerInteger
-        - hasHandlerDecimal
-        - hasHandlerObject
-        - hasHandlerObjectWithSchema
-        - hasHandlerParameters
       properties:
-        hasHandlerString:
-          title: Scaffolder to generate Trigger with handler string field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: yes          
-        hasHandlerBoolean:
-          title: Scaffolder to generate Trigger with handler boolean field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasHandlerInteger:
-          title: Scaffolder to generate Trigger with handler integer field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasHandlerDecimal:
-          title: Scaffolder to generate Trigger with handler decimal field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasHandlerObject:
-          title: Scaffolder to generate Trigger with handler object field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasHandlerObjectWithSchema:
-          title: Scaffolder to generate Trigger with handler object with schema field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasHandlerParameters:
-          title: Scaffolder to generate Trigger with handler object parameter field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
+        triggerList:
+          title: List of triggers and their signatures provided by the package
+          description: "Provide a list of one or more triggers with their signatures"
+          type: array
+          ui:options:
+            addable: true
+            removable: true
+          items:
+            type: object
+            required:
+              - triggerName
+              - handler
+              - output
+            properties:
+              triggerName:
+                title: Trigger Name
+                type: string
+                description: Name of the trigger
+                ui:options:
+                  placeholder: "logWatcher"
+              overview:
+                title: Overview of the trigger
+                type: string
+                description: Overview of the trigger
+                ui:widget: textarea
+                ui:options:
+                  placeholder: "Overview of what this trigger is about..."
+                  rows: 3
+              description:
+                title: Description of the trigger
+                type: string
+                description: Description of the trigger
+                ui:widget: textarea
+                ui:options:
+                  placeholder: "Additional details about this trigger..."
+                  rows: 3
+              settings:
+                title: Trigger settings field definition
+                type: array
+                description: Settings configuration
+                ui:options:
+                  addable: true
+                  removable: true
+                items:
+                  type: object
+                  required:
+                    - fieldName
+                    - fieldType
+                    - description
+                    - isRequired
+                    - isAppPropertySupport
+                  properties:
+                    fieldName:
+                      title: Field Name
+                      type: string
+                      description: Name of the field
+                      ui:options:
+                        placeholder: "fieldName"
+                      ui:className: font-semibold
+                    fieldType:
+                      title: Field Data Type
+                      type: string
+                      description: Data type of the field
+                      enum:
+                        - string
+                        - int
+                        - number
+                        - boolean
+                        - datetime
+                        - object
+                        - any
+                      enumNames:
+                        - "A String (text data)"
+                        - "An Integer (whole numbers)"
+                        - "A a Number (decimal numbers)"
+                        - "A a Boolean (true/false)"
+                        - "A a DateTime (date and time)"
+                        - "An Object (complex data)"
+                        - "An Any (any type)"
+                      default: string
+                      ui:field: Select
+                      ui:options:
+                        placeholder: "Select data type"
+                    description:
+                      title: Field Description
+                      type: string
+                      description: Description of the field
+                      ui:options:
+                        placeholder: "This description appears on tooltip hover"
+                      ui:className: font-semibold                    
+                    isRequired:
+                      title: Field is Required
+                      type: boolean
+                      default: true
+                      description: Is this a required/mandatory field?
+                      ui:widget: checkbox
+                      ui:options:
+                        - label: false
+                    isAppPropertySupport:
+                      title: Application property supported
+                      type: boolean
+                      default: true
+                      description: Can be set via application properties?
+                      ui:widget: checkbox
+                      ui:options:
+                        - label: false
+              handler:
+                title: Trigger handler field definition
+                type: array
+                description: Handler configuration
+                ui:options:
+                  addable: true
+                  removable: true
+                items:
+                  type: object
+                  required:
+                    - fieldName
+                    - fieldType
+                    - description
+                    - isRequired
+                    - isAppPropertySupport
+                  properties:
+                    fieldName:
+                      title: Field Name
+                      type: string
+                      description: Name of the field
+                      ui:options:
+                        placeholder: "fieldName"
+                      ui:className: font-semibold
+                    fieldType:
+                      title: Field Data Type
+                      type: string
+                      description: Data type of the field
+                      enum:
+                        - string
+                        - int
+                        - number
+                        - boolean
+                        - datetime
+                        - object
+                        - any
+                      enumNames:
+                        - "A String (text data)"
+                        - "An Integer (whole numbers)"
+                        - "A a Number (decimal numbers)"
+                        - "A a Boolean (true/false)"
+                        - "A a DateTime (date and time)"
+                        - "An Object (complex data)"
+                        - "An Any (any type)"
+                      default: string
+                      ui:field: Select
+                      ui:options:
+                        placeholder: "Select data type"
+                    description:
+                      title: Field Description
+                      type: string
+                      description: Description of the field
+                      ui:options:
+                        placeholder: "This description appears on tooltip hover"
+                      ui:className: font-semibold                    
+                    isRequired:
+                      title: Field is Required
+                      type: boolean
+                      description: Is this a required/mandatory field?
+                      default: true
+                      ui:widget: checkbox
+                      ui:options:
+                        - label: false
+                    isAppPropertySupport:
+                      title: Application property supported
+                      type: boolean
+                      default: true
+                      description: Can be set via application properties?
+                      ui:widget: checkbox
+                      ui:options:
+                        - label: false
+              output:
+                title: Trigger output field definition
+                type: array
+                description: Output configuration
+                ui:options:
+                  addable: true
+                  removable: true
+                items:
+                  type: object
+                  required:
+                    - fieldName
+                    - fieldType
+                    - description
+                    - isRequired
+                  properties:
+                    fieldName:
+                      title: Field Name
+                      type: string
+                      description: Name of the field
+                      ui:options:
+                        placeholder: "fieldName"
+                      ui:className: font-semibold
+                    fieldType:
+                      title: Field Data Type
+                      type: string
+                      description: Data type of the field
+                      enum:
+                        - string
+                        - int
+                        - number
+                        - boolean
+                        - datetime
+                        - object
+                        - any
+                      enumNames:
+                        - "A String (text data)"
+                        - "An Integer (whole numbers)"
+                        - "A a Number (decimal numbers)"
+                        - "A a Boolean (true/false)"
+                        - "A a DateTime (date and time)"
+                        - "An Object (complex data)"
+                        - "An Any (any type)"
+                      default: string
+                      ui:field: Select
+                      ui:options:
+                        placeholder: "Select data type"
+                    description:
+                      title: Field Description
+                      type: string
+                      description: Description of the field
+                      ui:options:
+                        placeholder: "This description appears on tooltip hover"
+                      ui:className: font-semibold                    
+                    isRequired:
+                      title: Field is Required
+                      type: boolean
+                      description: Is this a required/mandatory field?
+                      default: true
+                      ui:widget: checkbox
+                      ui:options:
+                        - label: false
 
-    - title: Trigger Output Configuration
-      required:
-        - hasOutputString
-        - hasOutputBoolean
-        - hasOutputInteger
-        - hasOutputDecimal
-        - hasOutputObject
-        - hasOutputObjectWithSchema
-      properties:
-        hasOutputString:
-          title: Scaffolder to generate Trigger with String output field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: yes          
-        hasOutputBoolean:
-          title: Scaffolder to generate Trigger with String output field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasOutputInteger:
-          title: Scaffolder to generate Trigger with String output field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasOutputDecimal:
-          title: Scaffolder to generate Trigger with String output field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasOutputObject:
-          title: Scaffolder to generate Trigger with String output field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
-        hasOutputObjectWithSchema:
-          title: Scaffolder to generate Trigger with String output field?
-          type: string
-          enum:
-            - yes
-            - no
-          default: no
 
 
   # The import flow consist out of 4 steps:
@@ -247,14 +365,14 @@ spec:
       each: ${{ parameters.triggerList}}
       action: file:makeDirectory
       input:
-        dirPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value }}      
+        dirPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value.triggerName }}      
 
     - id: makeTriggerIconSubFolder
       name: Make trigger sub-folder under src/trigger
       each: ${{ parameters.triggerList}}
       action: file:makeDirectory
       input:
-        dirPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/icons"}}      
+        dirPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value.triggerName + "/icons"}}      
 
     - id: makeTriggerIcons
       name: Make Trigger icons
@@ -262,7 +380,7 @@ spec:
       action: fetch:template
       input:
         url: ./skeletons/trigger/icons
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/icons" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value.triggerName + "/icons" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
@@ -274,7 +392,7 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/trigger/README.md
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/README.md" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value.triggerName + "/README.md" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
@@ -286,55 +404,29 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/trigger/trigger.json.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/trigger.json" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value.triggerName + "/trigger.json" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
           owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
           category: ${{ parameters.category }}
           version: ${{ parameters.version }}
-          triggerName: ${{ each.value }}
-          hasConnectionManager: ${{ parameters.hasConnectionManager }}
-          hasHandlerString: ${{ parameters.hasHandlerString }}
-          hasHandlerBoolean: ${{ parameters.hasHandlerBoolean }}
-          hasHandlerDropdown: ${{ parameters.hasHandlerDropdown }}
-          hasHandlerDateTime: ${{ parameters.hasHandlerDateTime }}
-          hasHandlerInteger: ${{ parameters.hasHandlerInteger }}
-          hasHandlerDecimal: ${{ parameters.hasHandlerDecimal }}
-          hasOutputString: ${{ parameters.hasOutputString }}
-          hasOutputBoolean: ${{ parameters.hasOutputBoolean }}
-          hasOutputInteger: ${{ parameters.hasOutputInteger }}
-          hasOutputDecimal: ${{ parameters.hasOutputDecimal }}
-          hasOutputObject: ${{ parameters.hasOutputObject }}
-          hasOutputObjectWithSchema: ${{ parameters.hasOutputObjectWithSchema }}
-          
+          trigger: ${{ each.value }}
+
     - id: generateMetadataGo
       name: Generate metadata.go
       each: ${{ parameters.triggerList}}
       action: fetch:template:file
       input:
         url: ./skeletons/trigger/metadata.go.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/metadata.go" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value.triggerName + "/metadata.go" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
           owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
           category: ${{ parameters.category }}
           version: ${{ parameters.version }}
-          triggerName: ${{ each.value }}
-          hasConnectionManager: ${{ parameters.hasConnectionManager }}
-          hasHandlerString: ${{ parameters.hasHandlerString }}
-          hasHandlerBoolean: ${{ parameters.hasHandlerBoolean }}
-          hasHandlerDropdown: ${{ parameters.hasHandlerDropdown }}
-          hasHandlerDateTime: ${{ parameters.hasHandlerDateTime }}
-          hasHandlerInteger: ${{ parameters.hasHandlerInteger }}
-          hasHandlerDecimal: ${{ parameters.hasHandlerDecimal }}
-          hasOutputString: ${{ parameters.hasOutputString }}
-          hasOutputBoolean: ${{ parameters.hasOutputBoolean }}
-          hasOutputInteger: ${{ parameters.hasOutputInteger }}
-          hasOutputDecimal: ${{ parameters.hasOutputDecimal }}
-          hasOutputObject: ${{ parameters.hasOutputObject }}
-          hasOutputObjectWithSchema: ${{ parameters.hasOutputObjectWithSchema }}
+          trigger: ${{ each.value }}
 
     - id: generateTriggerGo
       name: Generate trigger.go
@@ -342,14 +434,14 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/trigger/trigger.go.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/trigger.go" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value.triggerName + "/trigger.go" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
+          owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
           category: ${{ parameters.category }}
           version: ${{ parameters.version }}
-          triggerName: ${{ each.value }}
-          hasConnection: ${{ parameters.scaffoldConnector }}
+          trigger: ${{ each.value }}
 
     - id: generateTriggerTestGo
       name: Generate trigger_test.go
@@ -357,10 +449,14 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/trigger/trigger_test.go.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value + "/trigger_test.go" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value.triggerName+ "/trigger_test.go" }}
         replace: true
         values:
-          triggerName: ${{ each.value }}
+          extensionName: ${{ parameters.extensionName }}
+          owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
+          category: ${{ parameters.category }}
+          version: ${{ parameters.version }}
+          trigger: ${{ each.value }}
 
 
     - id: generateGoMod
