@@ -11,6 +11,14 @@ spec:
   children: []
 ---
 apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: tibco-flogo-generators
+  description: A group of documents
+spec:
+  owner: tibco-flogo-generators
+---
+apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
   name: extension-generators-locations
