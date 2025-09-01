@@ -1,10 +1,12 @@
 # FLOGO TRIGGER EXTENSION SCAFFOLDER
 
+![Flogo Extension Generator](./images/Flogo-border.png)
+
 This template is used to scaffold a Flogo Trigger Extension. It will populate the necessary structure and files required to implement a Flogo Trigger component that then can be used by Flogo. 
 
 Navigate to the Develop a new component section under TIBCO Developer Hub. You will see a tile named 'Flogo Trigger Extension Scaffolder':
 
-<img src="./images/simple-trigger-generator-scaffolder.png" alt="scaffolder" style="width:400px;"/>
+![scaffolder](./images/simple-trigger-generator-scaffolder.png)
 
 
 ## What you’ll need to do first...
@@ -15,7 +17,7 @@ TIBCO Developer Hub templates uses and store your artefacts in Github. You'll ne
 ### Fork the Official TIBCO Flogo Enterprise Repository
 Head over to [Flogo Enterprise Github Repository](https://github.com/TIBCOSoftware/flogo-enterprise-hub) and fork it to your Github account. 
 
-<img src="./images/simple-trigger-generator-repository-fork.png" alt="fork" style="width:400px;"/>
+![fork](./images/simple-trigger-generator-repository-fork.png)
 
 
 Any new extensions you create using the Flogo Extension Generator templates will be placed under the extensions folder in this repository.
@@ -25,7 +27,7 @@ Any new extensions you create using the Flogo Extension Generator templates will
 
 ### Step 1 - Flogo Enterprise Hub Repository Location
 
-<img src="./images/simple-trigger-generator-scaffolder-step1.png" alt="scaffolder-step1" style="width:800px;"/>
+![step1](./images/simple-trigger-generator-scaffolder-step1.png)
 
 Provide values for Owner, Repository, and Branch. The template will use these values to initiate a pull from this repository.
 
@@ -34,7 +36,7 @@ By default, the Repository name is 'flogo-enterprise-hub'. If you've forked the 
 
 ### Step 2 - Contribution Details
 
-<img src="./images/simple-trigger-generator-scaffolder-step2.png" alt="scaffolder-step2" style="width:800px;"/>
+![step2](./images/simple-trigger-generator-scaffolder-step2.png)
 
 
 Provide values for Category, ExtensionName, Version, Description, and Overview:
@@ -66,22 +68,20 @@ Example:
 
 | Section | |
 |--|--|
-| Details | <img src="./images/simple-trigger-generator-contribution-details-1.png" alt="review" style="width:800px;"/> |
-| Settings | <img src="./images/simple-trigger-generator-contribution-details-2.png" alt="review" style="width:800px;"/> |
-| Handler | <img src="./images/simple-trigger-generator-contribution-details-3.png" alt="review" style="width:800px;"/> |
-| Output | <img src="./images/simple-trigger-generator-contribution-details-4.png" alt="review" style="width:800px;"/> |
+| Details | ![details](./images/simple-trigger-generator-contribution-details-1.png) |
+| Settings | ![settings](./images/simple-trigger-generator-contribution-details-2.png) |
+| Handler | ![handler](./images/simple-trigger-generator-contribution-details-3.png)  |
+| Output | ![output](./images/simple-trigger-generator-contribution-details-4.png)  |
 
 
 
 ### Step 4 - Review
 
-
-<img src="./images/simple-trigger-generator-review.png" alt="review" style="width:800px;"/>
+![review](./images/simple-trigger-generator-review.png)
 
 ### Step 5 - Run
 
-
-<img src="./images/simple-trigger-generator-run.png" alt="run" style="width:800px;"/>
+![run](./images/simple-trigger-generator-run.png)
 
 
 

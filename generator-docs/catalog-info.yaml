@@ -13,7 +13,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
-  name: extension-generators-docs
+  name: tibco-flogo-generators-docs
 spec:
   targets:
     - ./generator-docs.yaml

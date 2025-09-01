@@ -6,7 +6,7 @@ The TIBCO Flogo Extension Generator templates are an accelerator in TIBCO Develo
 
 With these template, you can now create extension for:
 
-* [Activities](flogo-activity-extension-scaffolder.md)
-* [Triggers](flogo-trigger-extension-scaffolder.md)
-* [Functions](flogo-function-extension-scaffolder.md)
+* [Activities](./flogo-activity-extension-scaffolder.md)
+* [Triggers](./flogo-trigger-extension-scaffolder.md)
+* [Functions](./flogo-function-extension-scaffolder.md)
 

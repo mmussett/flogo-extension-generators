@@ -1,10 +1,12 @@
 # FLOGO FUNCTION EXTENSION SCAFFOLDER
 
+![Flogo Extension Generator](./images/Flogo-border.png)
+
 This template is used to scaffold a Flogo Function Extension. It will populate the necessary structure and files required to implement a Flogo Function component that then can be used by Flogo. 
 
 Navigate to the Develop a new component section under TIBCO Developer Hub. You will see a tile named 'Flogo Function Extension Scaffolder':
 
-<img src="./images/simple-function-generator-scaffolder.png" alt="scaffolder" style="width:400px;"/>
+![scaffolder](./images/simple-function-generator-scaffolder.png)
 
 
 ## What you’ll need to do first...
@@ -15,7 +17,7 @@ TIBCO Developer Hub templates uses and store your artefacts in Github. You'll ne
 ### Fork the Official TIBCO Flogo Enterprise Repository
 Head over to [Flogo Enterprise Github Repository](https://github.com/TIBCOSoftware/flogo-enterprise-hub) and fork it to your Github account. 
 
-<img src="./images/simple-function-generator-repository-fork.png" alt="fork" style="width:400px;"/>
+![fork](./images/simple-function-generator-repository-fork.png)
 
 
 Any new extensions you create using the Flogo Extension Generator templates will be placed under the extensions folder in this repository.
@@ -25,7 +27,7 @@ Any new extensions you create using the Flogo Extension Generator templates will
 
 ### Step 1 - Flogo Enterprise Hub Repository Location
 
-<img src="./images/simple-function-generator-scaffolder-step1.png" alt="scaffolder-step1" style="width:800px;"/>
+![step1](./images/simple-function-generator-scaffolder-step1.png)
 
 Provide values for Owner, Repository, and Branch. The template will use these values to initiate a pull from this repository.
 
@@ -34,7 +36,7 @@ By default, the Repository name is 'flogo-enterprise-hub'. If you've forked the 
 
 ### Step 2 - Contribution Details
 
-<img src="./images/simple-function-generator-scaffolder-step2.png" alt="scaffolder-step2" style="width:800px;"/>
+![step2](./images/simple-function-generator-scaffolder-step2.png)
 
 
 Provide values for Function Package Name, Version, Title, and Description:
@@ -49,7 +51,7 @@ Provide values for Function Package Name, Version, Title, and Description:
 
 ### Step 3 - Function Details
 
-<img src="./images/simple-function-generator-scaffolder-step3.png" alt="scaffolder-step3" style="width:800px;"/>
+![step3](./images/simple-function-generator-scaffolder-step3.png)
 
 The Function Details step allows you to configure one or more functions for your extension.
 
@@ -65,13 +67,11 @@ Provide values for each Function:
 
 ### Step 4 - Review
 
-
-<img src="./images/simple-function-generator-review.png" alt="review" style="width:800px;"/>
+![review](./images/simple-function-generator-review.png)
 
 ### Step 5 - Run
 
-
-<img src="./images/simple-function-generator-run.png" alt="run" style="width:800px;"/>
+![run](./images/simple-function-generator-run.png)
 
 
 
