@@ -1,6 +1,7 @@
 # FLOGO ACTIVITY EXTENSION SCAFFOLDER
 ![Flogo Extension Generator](./images/Flogo-border.png)
 
+## About this Template
 
 This template is used to scaffold a Flogo Activity Extension. It will populate the necessary structure and files required to implement a Flogo Activity component that then can be used by Flogo. 
 

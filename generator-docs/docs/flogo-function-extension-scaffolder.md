@@ -2,6 +2,8 @@
 
 ![Flogo Extension Generator](./images/Flogo-border.png)
 
+## About this Template
+
 This template is used to scaffold a Flogo Function Extension. It will populate the necessary structure and files required to implement a Flogo Function component that then can be used by Flogo. 
 
 Navigate to the Develop a new component section under TIBCO Developer Hub. You will see a tile named 'Flogo Function Extension Scaffolder':
