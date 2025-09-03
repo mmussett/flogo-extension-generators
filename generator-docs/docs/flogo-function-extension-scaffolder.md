@@ -48,7 +48,6 @@ Provide values for Function Package Name, Version, Title, and Description:
 | **Function Package Name** | is used to group all your extensions together within the IDE. Populates trigger.json |
 | **Version** | Version of the extension. |
 | **Title** | Name of the extension that your function will take. The template will create a folder under extension using this value. |
-
 | **Description** | Description of the extension. |
 
 ### Step 3 - Function Details
