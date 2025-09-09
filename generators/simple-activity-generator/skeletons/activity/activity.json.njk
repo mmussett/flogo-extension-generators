@@ -5,7 +5,7 @@
     "title": "${{values.activity.activityName}}",
     "author": "Created by Flogo Extension Generator",
     "display": {
-        "category": "${{values.category}}",
+        "category": "${{values.extensionName}}",
         "visible": true,
         "description": "",
         "smallIcon": "icons/activity-icon@2x.png",
@@ -16,7 +16,7 @@
             "enabled": true
         }
     },
-    "ref": "github.com/${{values.owner}}/flogo-enterprise-hub/extensions/${{values.extensionName}}/activity/${{values.activity.activityName}}",
+    "ref": "github.com/${{values.owner}}/flogo-enterprise-hub/extensions/${{values.extensionName}}/src/activity/${{values.activity.activityName}}",
     "settings": [
 {% for o in values.activity.settings %}
         {

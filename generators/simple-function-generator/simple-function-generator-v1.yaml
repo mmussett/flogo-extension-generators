@@ -213,19 +213,15 @@ spec:
       name: Make top-level folder in Repository
       action: file:makeDirectory
       input:
-        dirPath: ${{ "extensions/" + parameters.functionPackageName }}
-
-    - id: makeSrcFolder
-      name: Make src folder in Repository
-      action: file:makeDirectory
-      input:
-        dirPath: ${{ "extensions/" + parameters.functionPackageName + "/src" }}
+        dirPath: ${{ "extensions/functions" }}
 
     - id: makeFunctionFolder
-      name: Make function folder in src (if required)
+      name: Make top-level folder in Repository
       action: file:makeDirectory
       input:
-        dirPath: ${{ "extensions/" + parameters.functionPackageName + "/src/function" }}
+        dirPath: ${{ "extensions/functions/" + parameters.functionPackageName }}
+
+
           
     - id: generateFunctionGo
       name: Generate function.go
@@ -233,7 +229,7 @@ spec:
       action: fetch:template:file
       input:
         url: ./skeletons/function.go.njk
-        targetPath: ${{ "extensions/" + parameters.functionPackageName + "/src/function/" + each.value.functionName + ".go" }}
+        targetPath: ${{ "extensions/functions/" + parameters.functionPackageName + "/" + each.value.functionName + ".go" }}
         replace: true
         values:
           functionPackageName: ${{ parameters.functionPackageName }}
@@ -241,14 +237,23 @@ spec:
           arguments: ${{ each.value.arguments }}
           returnType: ${{ each.value.returnType }}
 
-       
+    - id: generateGoMod
+      name: Generate go.mod
+      action: fetch:template:file
+      input:
+        url: ./skeletons/go.mod.njk
+        targetPath: ${{ "extensions/functions/" + parameters.functionPackageName + "/go.mod" }}
+        replace: true
+        values:
+          owner:   ${{ (parameters.repoUrl | parseRepoUrl).owner }}
+          functionPackageName: ${{ parameters.functionPackageName }}
 
     - id: generateDescriptor.json
       name: Generate descriptor.json
       action: fetch:template:file
       input:
         url: ./skeletons/descriptor.json.njk
-        targetPath: ${{ "extensions/" + parameters.functionPackageName + "/src/function/descriptor.json" }}
+        targetPath: ${{ "extensions/functions/" + parameters.functionPackageName + "/descriptor.json" }}
         replace: true
         values:
           functionPackageName: ${{ parameters.functionPackageName }}

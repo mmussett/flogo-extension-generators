@@ -460,21 +460,23 @@ spec:
 
     - id: generateGoMod
       name: Generate go.mod
+      each: ${{ parameters.activityList}}
       action: fetch:template:file
       input:
-        url: ./skeletons/go.mod.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/go.mod" }}
+        url: ./skeletons/activity/go.mod.njk
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/activity/"+ each.value.activityName +"/go.mod" }}
         replace: true
         values:
           owner:   ${{ (parameters.repoUrl | parseRepoUrl).owner }}
           extensionName: ${{ parameters.extensionName }}
+          activityName: ${{ each.value.activityName }}          
 
     - id: generateReadme
       name: Generate top-level README.md
       action: fetch:template:file
       input:
         url: ./skeletons/README.md
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/src//README.md" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/README.md" }}
         replace: true
         values:
           extensionName: ${{ parameters.extensionName }}
