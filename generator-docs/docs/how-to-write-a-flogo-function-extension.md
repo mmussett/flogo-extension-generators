@@ -1,4 +1,4 @@
-# How to write a Flogo Function Extension
+# HOW TO WRITE A FLOGO FUNCTION EXTENSION
 
 ![Functions](./images/functions.png)
 
@@ -43,8 +43,22 @@ The following primative data types are supported by Flogo:
 | map     | map[interface{}]interface{} | A map with any type of key or value |
 
 
+### Naming guidelines
 
-### Flogo function folder structure
+Stick to the following rules when naming Flogo functions:
+
+| Rule | Description | Examples |
+|------|-------------|---------|
+| LowerCamelcase Only | Use lowerCamelCase. No underscores | checkdigit &check; <br> checkDigit &check; <br> Check_Digit &cross; <br> check_digit &cross; |  
+| Short & meaningful | Prefer concise nouns: crypto, checkdigit, json etc | crypto &check; <bR> cryptographicmessagedigest &cross; |
+| Avoid stuttering | Don't repeat the use of 'package' or responsibility name' | jsonpath &check; <br> jsonpackage &cross; |
+| No generic names | Avoid vague names | utils &cross; <br> common &cross; <br> helpers &cross; |
+| Organise by responsibility | Group implementation code by what it does-not by type | jsonpath &check; <br> json &cross; |
+
+
+
+
+### Flogo function extension folder structure
 
 Flogo functions follow a simple structure of:
 
@@ -77,19 +91,7 @@ extensions
                     +--- go.sum
 ```
 
-### Naming guidelines
-
-Stick to the following rules when naming Flogo functions:
-
-| Rule | Description | Examples |
-|------|-------------|---------|
-| LowerCamelcase Only | Use lowerCamelCase. No underscores | checkdigit &check; <br> checkDigit &check; <br> Check_Digit &cross; <br> check_digit &cross; |  
-| Short & meaningful | Prefer concise nouns: crypto, checkdigit, json etc | crypto &check; <bR> cryptographicmessagedigest &cross; |
-| Avoid stuttering | Don't repeat the use of 'package' or responsibility name' | jsonpath &check; <br> jsonpackage &cross; |
-| No generic names | Avoid vague names | utils &cross; <br> common &cross; <br> helpers &cross; |
-| Organise by responsibility | Group implementation code by what it does-not by type | jsonpath &check; <br> json &cross; |
-
-### Structure of Flogo function golang implementation
+### Structure of Flogo function extension golang implementation
 
 A Flogo function comprises of the following:
 
@@ -98,6 +100,7 @@ A Flogo function comprises of the following:
 | [`<function>.go`](#functiongo) | Actual function implemtation logic.<br> Your package can have one or more implementations |
 | [descriptor.json](#descriptorjson) | Function metafile |
 | go.mod <br> go.sum | Golang module files |
+
 
 
 #### descriptor.json
