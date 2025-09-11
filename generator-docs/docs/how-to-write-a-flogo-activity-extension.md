@@ -16,10 +16,9 @@ To write a Flogo extension - whether it's an activity, trigger, or function - yo
 - Flogo groups activities together under an activity extension.
 - Many activities can reside under an extension.
 - Each activity has its own golang package name.
-- Each activity has its own metafile `activity.json`
-- Each activity has its own golang source file `activity.go`
+- Each activity has its own json metafile [`activity.json`](#descriptorjson)
+- Each activity has its own golang source files [`activity.go`](#activitygo) and [`metadata.go`](#metadatago)
 - The package name provide by you is completely arbitary but should be in lowerCamelCase.
-- Each activity is provided in it's own source file and metafile under its own golang package folder.
 
 ### Supported data types and their mapping
 
@@ -114,7 +113,7 @@ A Flogo activity comprises of the following:
 | ---------------------------------- | ---------------------------------------------------------------------------------- |
 | [activity.go](#activitygo)         | Activity implemtation logic.<br> Your package can have one or more implementations |
 | [metadata.go](#metadatago)         | Input and Output structure and mapping logic                                       |
-| [descriptor.json](#descriptorjson) | Activity metafile                                                                  |
+| [descriptor.json](#descriptorjson) | Activity metafile defines Activity attributes, its Settings, Input, and Output     |
 | go.mod <br> go.sum                 | Golang module files                                                                |
 
 #### descriptor.json
@@ -140,6 +139,9 @@ It comprises of the following JSON fields:
 | .inputs                | An array of name-type pairs that describe the input to the Activity.                                           |
 | .output                | An array of name-type pairs that describe the output of the Activity.                                          |
 
+See [UI decorators options](#ui-decorator-options) on the various supported UI widgets available for Settings, Inputs, and Outputs.
+
+<br>
 #### Contrived `descriptor.json` example:
 
 ```json
@@ -380,15 +382,70 @@ func (o *Output) FromMap(values map[string]interface{}) error {
 }
 ```
 
-Internally Flogo uses `map[string]interface{}` to store your output data and you must implement two functions:
+Internally Flogo uses `map[string]interface{}` to store your output data and you must implement two functions to move data in to and out of the map:
 
 - `func (*Output) ToMap() map[string]interface{} {}`
 - `func (*Output) FromMap(values map[string]interface{}) error {}`
 
-* FromMap() is used to move data from a `map[string]interface{}` to your `type Input struct{}`
-* ToMap() is used to move data from `type Input struct{}` to a `map[string]interface{}`
+* FromMap() is used to move data from a `map[string]interface{}` to your `type Input struct{}` member fields.
+* ToMap() is used to move data from `type Input struct{}` member fields to a `map[string]interface{}`
 
 The Flogo runtime automatically calls `FromMap()` and `ToMap()` for you.
+
+When writing your FromMap() function the following data coerce methods are available to you:
+
+| Flogo Type | Go Type                | Method              |
+| ---------- | ---------------------- | ------------------- |
+| any        | interface{}            | coerce.ToAny()      |
+| string     | string                 | coerce.ToString()   |
+| int        | int                    | coerce.ToInt()      |
+| int32      | int32                  | coerce.ToInt32()    |
+| int64      | int64                  | coerce.ToInt64()    |
+| float32    | float32                | coerce.ToFloat32()  |
+| float64    | float64                | coerce.ToFloat64()  |
+| boolean    | bool                   | coerce.ToBool()     |
+| bytes      | []byte                 | coerce.ToBytes()    |
+| dateTime   | time                   | coerce.ToDateTime() |
+| array      | []interface{}          | coerce.ToArray()    |
+| object     | map[string]interface{} | coerce.ToObject()   |
+| params     | map[string]string      | coerce.ToParams()   |
+
+<br>
+Example, if my `type struct{}` contained a member field such: <br>
+
+```golang
+type Input struct {
+    Message map[] ``md:"message"``
+}
+```
+
+In the ToMap() function you would write:
+
+```golang
+func (i *Input) ToMap() map[string]interface{} {
+
+	return map[string]interface{}{
+		"message": i.Message,
+	}
+}
+```
+
+In the FromMap function you would write:
+
+```golang
+func (i *Input) FromMap(values map[string]interface{}) error {
+
+	var err error
+    // Using coersion take the map key "message" value and populate the Message field member of the Input struct
+	i.Message, err = coerce.ToString(values["message"])
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+```
+
 
 #### Contrived `metadata.go` example:
 
@@ -440,12 +497,11 @@ func (o *Output) ToMap() map[string]interface{} {
 
 #### Activity Eval Handler logic
 
-
 The `func (*Activity) Eval(activity.Context) (bool, error)` is called when an Activity is being evaluated. Returning true indicates that the task is done.
 
 ##### Marshalling Input structure
-If your Activity has any Input data requirements then you will need to implement marshalling logic in order to populate your `type Input struct{}` as defined in `metadata.go` 
 
+If your Activity has any Input data requirements then you will need to implement marshalling logic in order to populate your `type Input struct{}` as defined in `metadata.go`
 
 ```golang
 	input := &Input{}
@@ -456,6 +512,7 @@ If your Activity has any Input data requirements then you will need to implement
 ```
 
 ##### Accessing Activity structure members
+
 Access to Activity struct members can be achieved using the `*Activity` pointer reference.
 
 ```golang
@@ -480,6 +537,7 @@ Access to Activity struct members can be achieved using the `*Activity` pointer 
 ```
 
 ##### Logging
+
 The `activity.Context` provides an instantiated Logger:
 
 ```golang
@@ -487,6 +545,7 @@ The `activity.Context` provides an instantiated Logger:
 ```
 
 ##### Marshalling Output structure
+
 If your Activity has any Output data requirements then you will need to implement marshalling logic in order to populate your `type Output struct{}` as defined in `metadata.go`
 
 ```golang
@@ -585,6 +644,101 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	}
 
 	return true, nil
+}
+```
+
+## UI decorator options
+
+Settings, Input, and Output fields support various decorator UI options:
+
+1. Simple text input box for name-type pair:
+
+![ui-textbox](./images/ui-textbox.png)
+
+```json
+{
+  "name": "someSettingValue",
+  "type": "string",
+  "display": {
+    "name": "Some Setting Value",
+    "description": "Enter a string value",
+    "appPropertySupport": true
+  },
+  "value": "default string value"
+}
+```
+
+2. Simple boolean toggle:
+
+![ui-textbox](./images/ui-boolean-toggle.png)
+
+```json
+{
+  "name": "includeTimestamp",
+  "type": "bool",
+  "required": true,
+  "valaue": true,
+  "display": {
+    "name": "Include timestamp in structure",
+    "description": "If set to true, structured log will contain timestamp",
+    "type": "boolean"
+  }
+}
+```
+
+3. Dropdown box:
+
+![ui-textbox](./images/ui-dropdown.png)
+
+```json
+{
+  "name": "stream",
+  "type": "string",
+  "required": true,
+  "display": {
+    "name": "OS Stream",
+    "description": "Select one stream from the dropdown",
+    "type": "dropdown",
+    "selection": "single",
+    "appPropertySupport": true
+  },
+  "allowed": ["stdout", "stderr"],
+  "value": "stdout"
+}
+```
+
+4. Array table:
+
+![ui-textbox](./images/ui-proparray.png)
+
+```json
+{
+  "name": "PropertyArray",
+  "type": "array",
+  "display": {
+    "name": "Property Array",
+    "description": "Name, type and value of attribute(s). If configured with app property, value of app property must be a valid JSON object. e.g. {\"string_prop\":\"string_val\",\"integer_prop\":0, \"boolean_prop\":true}",
+    "appPropertySupport": true,
+    "type": "table",
+    "schema": "{\r\n    \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r\n    \"definitions\": {},\r\n    \"id\": \"http://example.com/example.json\",\r\n    \"items\": {\r\n        \"id\": \"/items\",\r\n        \"properties\": {\r\n            \"Name\": {\r\n                \"id\": \"/items/properties/Name\",\r\n                \"type\": \"string\"\r\n            },\r\n            \"Type\": {\r\n                \"id\": \"/items/properties/Type\",\r\n                \"type\": {\"enum\":[\"String\", \"Integer\", \"Boolean\"]}\r\n            },\r\n            \"Value\": {\r\n                \"id\": \"/items/properties/Value\",\r\n                \"type\": \"string\"\r\n            }\r\n        },\r\n        \"type\": \"object\"\r\n    },\r\n    \"type\": \"array\"\r\n}"
+  }
+}
+```
+
+5. JSON Object
+
+![ui-jsonobject](./images/ui-jsonobject.png)
+
+```json
+{
+  "name": "anObject",
+  "type": "object",
+  "display": {
+    "name": "Object Schema",
+    "description": "An example JSON data",
+    "type": "texteditor",
+    "syntax": "json"
+  }
 }
 ```
 
