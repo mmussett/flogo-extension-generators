@@ -12,7 +12,7 @@
 		"largeIcon": "icons/trigger-icon@3x.png",
 		"tags": ["${{values.category}}"]
 	},
-	"ref": "github.com/${{values.owner}}/flogo-enterprise-hub/extensions/${{values.extensionName}}/trigger/${{values.triggerName}}",
+	"ref": "github.com/${{values.owner}}/flogo-enterprise-hub/extensions/${{values.extensionName}}/src/trigger/${{values.trigger.triggerName}}",
 	"handler": {
 		"settings": [
 {% for o in values.trigger.handler %}
@@ -46,7 +46,15 @@
                 "syntax": "json",
                 "mappable": true,
                 "visible": true
-            }{% endif %}
+            }{% else %},
+            "display": {
+                "name": "${{o.fieldName}}",
+                "description": "${{o.description}}",
+                "required": ${{o.isRequired}},
+                "type":"${{o.fieldType}}",
+                "appPropertySupport": ${{o.isAppPropertySupport}}
+            }
+            {% endif %}
         }{% if not loop.last %},{% endif %}
 {%- endfor %}
 	],
