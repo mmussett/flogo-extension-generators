@@ -9,7 +9,7 @@ metadata:
     ## Pre-requisite actions before running this template
 
     Before running this template please head over to https://github.com/TIBCOSoftware/flogo-enterprise-hub and fork this repository.
-    
+
 
     ## Post-actions to be done after running this template
 
@@ -38,13 +38,13 @@ spec:
         - branchName
       properties:
         repoUrl:
-          title: GitHub repository 
+          title: GitHub repository
           type: string
           ui:field: RepoUrlPicker
           ui:options:
             allowedHosts:
               - github.com
-          default: "github.com?owner=mmussett&repo=flogo-enterprise-hub"
+          default: 'github.com?owner=mmussett&repo=flogo-enterprise-hub'
         branchName:
           title: Branch name
           type: string
@@ -69,11 +69,11 @@ spec:
           type: string
           description: Extension name of the Trigger
           ui:options:
-            placeholder: "logger"      
+            placeholder: 'logger'
         version:
           title: Version
           type: string
-          default: "1.0.0"
+          default: '1.0.0'
         description:
           title: Description
           type: string
@@ -82,7 +82,7 @@ spec:
           title: Overview
           type: string
           description: Overview of the extension
-          default: "This extension provides the following features..."
+          default: 'This extension provides the following features...'
 
     - title: Trigger Configurator
       required:
@@ -90,7 +90,7 @@ spec:
       properties:
         triggerList:
           title: List of triggers and their signatures provided by the package
-          description: "Provide a list of one or more triggers with their signatures"
+          description: 'Provide a list of one or more triggers with their signatures'
           type: array
           ui:options:
             addable: true
@@ -107,14 +107,14 @@ spec:
                 type: string
                 description: Name of the trigger
                 ui:options:
-                  placeholder: "logWatcher"
+                  placeholder: 'logWatcher'
               overview:
                 title: Overview of the trigger
                 type: string
                 description: Overview of the trigger
                 ui:widget: textarea
                 ui:options:
-                  placeholder: "Overview of what this trigger is about..."
+                  placeholder: 'Overview of what this trigger is about...'
                   rows: 3
               description:
                 title: Description of the trigger
@@ -122,7 +122,7 @@ spec:
                 description: Description of the trigger
                 ui:widget: textarea
                 ui:options:
-                  placeholder: "Additional details about this trigger..."
+                  placeholder: 'Additional details about this trigger...'
                   rows: 3
               settings:
                 title: Trigger settings field definition
@@ -145,7 +145,7 @@ spec:
                       type: string
                       description: Name of the field
                       ui:options:
-                        placeholder: "fieldName"
+                        placeholder: 'fieldName'
                       ui:className: font-semibold
                     fieldType:
                       title: Field Data Type
@@ -160,24 +160,24 @@ spec:
                         - object
                         - any
                       enumNames:
-                        - "A String (text data)"
-                        - "An Integer (whole numbers)"
-                        - "A a Number (decimal numbers)"
-                        - "A a Boolean (true/false)"
-                        - "A a DateTime (date and time)"
-                        - "An Object (complex data)"
-                        - "An Any (any type)"
+                        - 'A String (text data)'
+                        - 'An Integer (whole numbers)'
+                        - 'A a Number (decimal numbers)'
+                        - 'A a Boolean (true/false)'
+                        - 'A a DateTime (date and time)'
+                        - 'An Object (complex data)'
+                        - 'An Any (any type)'
                       default: string
                       ui:field: Select
                       ui:options:
-                        placeholder: "Select data type"
+                        placeholder: 'Select data type'
                     description:
                       title: Field Description
                       type: string
                       description: Description of the field
                       ui:options:
-                        placeholder: "This description appears on tooltip hover"
-                      ui:className: font-semibold                    
+                        placeholder: 'This description appears on tooltip hover'
+                      ui:className: font-semibold
                     isRequired:
                       title: Field is Required
                       type: boolean
@@ -215,7 +215,7 @@ spec:
                       type: string
                       description: Name of the field
                       ui:options:
-                        placeholder: "fieldName"
+                        placeholder: 'fieldName'
                       ui:className: font-semibold
                     fieldType:
                       title: Field Data Type
@@ -230,24 +230,24 @@ spec:
                         - object
                         - any
                       enumNames:
-                        - "A String (text data)"
-                        - "An Integer (whole numbers)"
-                        - "A a Number (decimal numbers)"
-                        - "A a Boolean (true/false)"
-                        - "A a DateTime (date and time)"
-                        - "An Object (complex data)"
-                        - "An Any (any type)"
+                        - 'A String (text data)'
+                        - 'An Integer (whole numbers)'
+                        - 'A a Number (decimal numbers)'
+                        - 'A a Boolean (true/false)'
+                        - 'A a DateTime (date and time)'
+                        - 'An Object (complex data)'
+                        - 'An Any (any type)'
                       default: string
                       ui:field: Select
                       ui:options:
-                        placeholder: "Select data type"
+                        placeholder: 'Select data type'
                     description:
                       title: Field Description
                       type: string
                       description: Description of the field
                       ui:options:
-                        placeholder: "This description appears on tooltip hover"
-                      ui:className: font-semibold                    
+                        placeholder: 'This description appears on tooltip hover'
+                      ui:className: font-semibold
                     isRequired:
                       title: Field is Required
                       type: boolean
@@ -284,7 +284,7 @@ spec:
                       type: string
                       description: Name of the field
                       ui:options:
-                        placeholder: "fieldName"
+                        placeholder: 'fieldName'
                       ui:className: font-semibold
                     fieldType:
                       title: Field Data Type
@@ -299,24 +299,24 @@ spec:
                         - object
                         - any
                       enumNames:
-                        - "A String (text data)"
-                        - "An Integer (whole numbers)"
-                        - "A a Number (decimal numbers)"
-                        - "A a Boolean (true/false)"
-                        - "A a DateTime (date and time)"
-                        - "An Object (complex data)"
-                        - "An Any (any type)"
+                        - 'A String (text data)'
+                        - 'An Integer (whole numbers)'
+                        - 'A a Number (decimal numbers)'
+                        - 'A a Boolean (true/false)'
+                        - 'A a DateTime (date and time)'
+                        - 'An Object (complex data)'
+                        - 'An Any (any type)'
                       default: string
                       ui:field: Select
                       ui:options:
-                        placeholder: "Select data type"
+                        placeholder: 'Select data type'
                     description:
                       title: Field Description
                       type: string
                       description: Description of the field
                       ui:options:
-                        placeholder: "This description appears on tooltip hover"
-                      ui:className: font-semibold                    
+                        placeholder: 'This description appears on tooltip hover'
+                      ui:className: font-semibold
                     isRequired:
                       title: Field is Required
                       type: boolean
@@ -325,8 +325,6 @@ spec:
                       ui:widget: checkbox
                       ui:options:
                         - label: false
-
-
 
   # The import flow consist out of 4 steps:
   # 1. Fetch the project from GitHub
@@ -365,14 +363,14 @@ spec:
       each: ${{ parameters.triggerList}}
       action: file:makeDirectory
       input:
-        dirPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value.triggerName }}      
+        dirPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value.triggerName }}
 
     - id: makeTriggerIconSubFolder
       name: Make trigger sub-folder under src/trigger
       each: ${{ parameters.triggerList}}
       action: file:makeDirectory
       input:
-        dirPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value.triggerName + "/icons"}}      
+        dirPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/" + each.value.triggerName + "/icons"}}
 
     - id: makeTriggerIcons
       name: Make Trigger icons
@@ -458,16 +456,15 @@ spec:
           version: ${{ parameters.version }}
           trigger: ${{ each.value }}
 
-
     - id: generateGoMod
       name: Generate go.mod
       action: fetch:template:file
       input:
         url: ./skeletons/go.mod.njk
-        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/go.mod" }}
+        targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/"+ each.value.triggerName +"/go.mod" }}
         replace: true
         values:
-          owner:   ${{ (parameters.repoUrl | parseRepoUrl).owner }}
+          owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
           extensionName: ${{ parameters.extensionName }}
 
     - id: generateReadme
