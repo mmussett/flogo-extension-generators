@@ -458,14 +458,15 @@ spec:
 
     - id: generateGoMod
       name: Generate go.mod
+      each: ${{ parameters.triggerList}}
       action: fetch:template:file
       input:
-        url: ./skeletons/go.mod.njk
+        url: ./skeletons/trigger/go.mod.njk
         targetPath: ${{ "extensions/" + parameters.extensionName + "/src/trigger/"+ each.value.triggerName +"/go.mod" }}
         replace: true
         values:
           owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
-          extensionName: ${{ parameters.extensionName }}
+          triggerName: ${{ each.value.triggerName }}
 
     - id: generateReadme
       name: Generate top-level README.md
