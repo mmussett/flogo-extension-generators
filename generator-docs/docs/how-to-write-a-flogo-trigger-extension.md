@@ -13,16 +13,13 @@ To write a Flogo extension - whether it's an activity, trigger, or function - yo
 ## Architecture
 
 - Flogo triggers have a single duty of responsibilty.
-- Flogo groups activities together under an activity extension.
-- Many activities can reside under an extension.
-- Each activity has its own golang package name.
-- Each activity has its own json metafile [`activity.json`](#descriptorjson)
-- Each activity has its own golang source files [`activity.go`](#activitygo) and [`metadata.go`](#metadatago)
+- One or more trigger can exists for each extension.
+- Each trigger has its own golang package name.
+- Each trigger has its own json metafile [`trigger.json`](#descriptorjson)
+- Each trigger has its own golang source files [`trigger.go`](#triggergo) and [`metadata.go`](#metadatago)
 - The package name provide by you is completely arbitary but should be in lowerCamelCase.
 
 ### Supported data types and their mapping
-
-Flogo supports inline functions that are evaluated and executed by the Flogo Engine at runtime. The function can be added to any input argument on any activity such as a Mapper. Unlike Flogo Activities, Flogo Functions support multiple arguments as input and return exactly one result.
 
 The following primative data types are supported by Flogo:
 
@@ -56,12 +53,12 @@ Stick to the following rules when naming Flogo functions:
 | No generic names           | Avoid vague names                                         | utils &cross; <br> common &cross; <br> helpers &cross;                                       |
 | Organise by responsibility | Group implementation code by what it does-not by type     | jsonpath &check; <br> json &cross;                                                           |
 
-### Flogo activity extension folder structure
+### Flogo trigger extension folder structure
 
-Flogo activities follow a simple structure of:
+Flogo trigger follow a simple structure of:
 
-- Flogo Activity extensions should reside under `extensions/<extensionNameDir>` E.g. zerlog.
-- The `<activityPackageDir>` must match the golang package name.
+- Flogo Trigger extensions should reside under `extensions/<extensionNameDir>` E.g. tcp.
+- The `<triggerPackageDir>` must match the golang package name.
 
 It is highly recommended that you follow the [naming guidelines](#naming-guidelines)
 
@@ -72,20 +69,23 @@ extensions
             ¦
             +--- src
             ¦     ¦
-            ¦     +--- activity
-            ¦            ¦
-            ¦            +--- <activityPackageDir>
-            ¦            ¦       ¦
-            ¦            ¦       +--- activity.json
-            ¦            ¦       +--- activity.go
-            ¦            ¦       +--- metadata.go
-            ¦            ¦       +--- go.mod
-            ¦            ¦       +--- go.sum
-            ¦            ¦       +--- icons
-            ¦            ¦              ¦
-            ¦            ¦              +--- <activityName>-icon.png
-            ¦            ¦              +--- <activityName>-icon@2x.png
-            ¦            ¦              +--- <activityName>-icon@3x.png
+            ¦     +--- trigger
+            ¦     ¦      ¦
+            ¦     ¦      +--- <triggerPackageDir>
+            ¦     ¦              ¦
+            ¦     ¦              +--- trigger.json
+            ¦     ¦              +--- trigger.go
+            ¦     ¦              +--- metadata.go
+            ¦     ¦              +--- go.mod
+            ¦     ¦              +--- go.sum
+            ¦     ¦              +--- icons
+            ¦     ¦                     ¦
+            ¦     ¦                     +--- <triggerName>-icon.png
+            ¦     ¦                     +--- <triggerName>-icon@2x.png
+            ¦     ¦                     +--- <triggerName>-icon@3x.png
+            ¦     ¦
+            |     ¦
+            ¦     +-- activity
             ¦            ¦
             ¦            +--- <activityPackageDir>
             ¦                    ¦
@@ -105,20 +105,20 @@ extensions
             +--- docs
 ```
 
-### Structure of Flogo activity extension golang implementation
+### Structure of Flogo trigger extension golang implementation
 
-A Flogo activity comprises of the following:
+A Flogo trigger comprises of the following:
 
-| File                               | Description                                                                        |
-| ---------------------------------- | ---------------------------------------------------------------------------------- |
-| [activity.go](#activitygo)         | Activity implemtation logic.<br> Your package can have one or more implementations |
-| [metadata.go](#metadatago)         | Input and Output structure and mapping logic                                       |
-| [descriptor.json](#descriptorjson) | Activity metafile defines Activity attributes, its Settings, Input, and Output     |
-| go.mod <br> go.sum                 | Golang module files                                                                |
+| File                               | Description                                                                             |
+| ---------------------------------- | --------------------------------------------------------------------------------------- |
+| [trigger.go](#triggergo)           | Trigger implemtation logic.<br> Your package has one implementations                    |
+| [metadata.go](#metadatago)         | Input and Output structure and mapping logic                                            |
+| [descriptor.json](#descriptorjson) | Trigger metafile defines Trigger attributes, its Settings, Handler Settings, and Output |
+| go.mod <br> go.sum                 | Golang module files                                                                     |
 
 #### descriptor.json
 
-The descriptor.json is a metafile that describes your Flogo activity and is required for each activity implementations.
+The descriptor.json is a metafile that describes your Flogo trigger and is required for each trigger implementations.
 
 It comprises of the following JSON fields:
 
@@ -136,7 +136,7 @@ It comprises of the following JSON fields:
 | .ref                   | points to the repository location for the activity                                                             |
 | .feature.retry.enabled | Enables the retry-on-error feature                                                                             |
 | .settings              | An array of name-type pairs that describe the Activity settings.                                               |
-| .inputs                | An array of name-type pairs that describe the input to the Activity.                                           |
+| .handler.settings      | An array of name-type pairs that describe the input to the Activity.                                           |
 | .output                | An array of name-type pairs that describe the output of the Activity.                                          |
 
 See [UI decorators options](#ui-decorator-options) on the various supported UI widgets available for Settings, Inputs, and Outputs.
@@ -146,87 +146,102 @@ See [UI decorators options](#ui-decorator-options) on the various supported UI w
 
 ```json
 {
-  "name": "log",
+  "title": "TCP Server Trigger",
   "version": "1.0.0",
-  "type": "flogo:activity",
-  "title": "Zero Log",
+  "type": "flogo:trigger",
+  "name": "TCP Server",
   "author": "Created by Flogo Extension Generator",
   "display": {
-    "category": "zerolog",
+    "description": " trigger",
+    "category": "TCP",
     "visible": true,
-    "description": "Structured logging using zerolog",
-    "smallIcon": "icons/activity-icon@2x.png",
-    "largeIcon": "icons/activity-icon@3x.png"
+    "smallIcon": "icons/trigger-icon@2x.png",
+    "largeIcon": "icons/trigger-icon@3x.png",
+    "tags": ["TCP"]
   },
-  "feature": {
-    "retry": {
-      "enabled": false
-    },
-    "loops": {
-      "enabled": false
-    }
+  "ref": "github.com/mmussett/flogo-enterprise-hub/extensions/tcp/src/trigger/tcpServer",
+  "handler": {
+    "settings": []
   },
-  "ref": "github.com/mmussett/flogo-enterprise-hub/extensions/zerolog/src/activity/log",
   "settings": [
     {
-      "name": "stream",
+      "name": "address",
       "type": "string",
       "required": true,
       "display": {
-        "name": "OS Stream",
-        "description": "Select one stream from the dropdown",
-        "type": "dropdown",
-        "selection": "single",
+        "name": "address",
+        "description": "Network Address to establish listener on",
+        "required": true,
+        "type": "string",
         "appPropertySupport": true
-      },
-      "allowed": ["stdout", "stderr"],
-      "value": "stdout"
+      }
     },
     {
-      "name": "level",
-      "type": "string",
+      "name": "port",
+      "type": "int",
       "required": true,
       "display": {
-        "name": "Log Level",
-        "description": "Select one level from the dropdown",
-        "type": "dropdown",
-        "selection": "single",
+        "name": "port",
+        "description": "Port on network address to establish listener on",
+        "required": true,
+        "type": "int",
         "appPropertySupport": true
-      },
-      "allowed": ["panic", "fatal", "error", "warn", "info", "debug", "trace"],
-      "value": "info"
-    }
-  ],
-  "inputs": [
-    {
-      "name": "message",
-      "type": "string",
-      "description": "Log message string",
-      "required": true
+      }
     }
   ],
   "outputs": [
     {
-      "name": "message",
-      "type": "string",
-      "description": "Log message string",
-      "required": true
+      "name": "data",
+      "type": "object",
+      "required": true,
+      "display": {
+        "name": "JSON Schema",
+        "description": "An example JSON-based object",
+        "type": "texteditor",
+        "syntax": "json",
+        "mappable": true,
+        "visible": true
+      }
     }
   ]
 }
 ```
 
-#### activity.go
+#### trigger.go
 
-The `activity.go` file contains the actual code of your activity. <br>
+The `trigger.go` file contains the actual code of your activity. <br>
 See [Naming guidelines](#naming-guidelines) on good practice for its name. <br>
 
-It must implement the following interface:
+A working example can be found [here](https://github.com/project-flogo/core/blob/master/examples/trigger/trigger.go)
+
+It must implement the following interfaces:
 
 ```golang
-type Activity interface {
-    Metadata() *Metadata
-    Eval(Context) (bool, err)
+type Trigger interface {
+
+	// Initialize is called to initialize the Trigger
+	Initialize(ctx InitContext) error
+}
+
+// Managed is an interface that is implemented by an object that needs to be
+// managed via start/stop
+type Managed interface {
+
+	// Start starts the managed object
+	Start() error
+
+	// Stop stops the manged object
+	Stop() error
+}
+
+// Factory is used to create new instances of a trigger
+type Factory interface {
+
+	// Metadata returns the metadata of the trigger
+	Metadata() *Metadata
+
+	// New create a new Trigger
+	New(config *Config) (Trigger, error)
 }
 ```
 
@@ -445,7 +460,6 @@ func (i *Input) FromMap(values map[string]interface{}) error {
     return nil
 }
 ```
-
 
 #### Contrived `metadata.go` example:
 

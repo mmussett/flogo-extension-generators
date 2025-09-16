@@ -22,8 +22,6 @@ To write a Flogo extension - whether it's an activity, trigger, or function - yo
 
 ### Supported data types and their mapping
 
-Flogo supports inline functions that are evaluated and executed by the Flogo Engine at runtime. The function can be added to any input argument on any activity such as a Mapper. Unlike Flogo Activities, Flogo Functions support multiple arguments as input and return exactly one result.
-
 The following primative data types are supported by Flogo:
 
 #### Standard Data Types:
@@ -60,7 +58,7 @@ Stick to the following rules when naming Flogo functions:
 
 Flogo activities follow a simple structure of:
 
-- Flogo Activity extensions should reside under `extensions/<extensionNameDir>` E.g. zerlog.
+- Flogo Activity extensions should reside under `extensions/<extensionNameDir>` E.g. zerolog.
 - The `<activityPackageDir>` must match the golang package name.
 
 It is highly recommended that you follow the [naming guidelines](#naming-guidelines)
@@ -220,6 +218,8 @@ See [UI decorators options](#ui-decorator-options) on the various supported UI w
 
 The `activity.go` file contains the actual code of your activity. <br>
 See [Naming guidelines](#naming-guidelines) on good practice for its name. <br>
+
+A working example can be found [here](https://github.com/project-flogo/core/blob/master/examples/activity/activity.go)
 
 It must implement the following interface:
 
@@ -445,7 +445,6 @@ func (i *Input) FromMap(values map[string]interface{}) error {
 	return nil
 }
 ```
-
 
 #### Contrived `metadata.go` example:
 
