@@ -3,7 +3,7 @@
 ![Functions](./images/activity.png)
 
 To write a Flogo extension - whether it's an activity, trigger, or function - you'll be working in Go and following a specific structure that Flogo expects. Here's a practical breakdown tailored for somebody like you, who's already deep into backend and infrastructure tooling.
-
+ya
 ## Prerequisites
 
 - [Go](https://go.dev/doc/install) installed (Flogo is written on Go, hence the 'go' reference in 'Flogo')
